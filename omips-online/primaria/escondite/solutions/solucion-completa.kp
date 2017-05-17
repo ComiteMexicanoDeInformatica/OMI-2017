@@ -1,0 +1,60 @@
+iniciar-programa
+	define-nueva-instruccion media-vuelta como inicio
+    	gira-izquierda;
+        gira-izquierda;
+    fin;
+
+	define-nueva-instruccion gira-derecha como inicio
+    	gira-izquierda;
+        gira-izquierda;
+        gira-izquierda;
+    fin;
+
+	define-nueva-instruccion ir-al-fondo como inicio
+    	gira-izquierda;
+        avanza;
+        gira-derecha;
+        mientras frente-libre hacer inicio
+        	avanza;
+        fin;
+        media-vuelta;
+    fin;
+
+	define-nueva-instruccion avanza-hasta-izquierda-libre como inicio
+    	mientras izquierda-bloqueada hacer inicio
+    		avanza;
+    	fin;
+    fin;
+
+    inicia-ejecucion
+    	ir-al-fondo;
+        
+        (* Hay un caso especial. Cuando hay un obstaculo
+           pegado a la pared derecha del mundo, Karel intentara
+           rodear el obstaculo y chocara. Evitamos ese caso
+           caminando hasta estar por enfrente del obstaculo. *)
+        avanza-hasta-izquierda-libre;
+
+        mientras orientado-al-oeste hacer inicio
+        	mientras izquierda-libre hacer inicio
+            	avanza;
+            fin;
+            media-vuelta;
+            avanza;
+            gira-derecha;
+            avanza;
+            gira-derecha;
+            si frente-libre entonces inicio
+            	avanza;
+                gira-izquierda;
+            fin sino inicio
+            	gira-derecha;
+                avanza;
+                gira-izquierda;
+                avanza;
+                avanza-hasta-izquierda-libre;
+            fin;
+        fin;
+        apagate;
+    termina-ejecucion
+finalizar-programa

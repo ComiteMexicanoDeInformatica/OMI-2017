@@ -1,0 +1,113 @@
+iniciar-programa
+	define-nueva-instruccion gira (n) como
+    inicio
+    	repetir n veces
+        	gira-izquierda;
+    fin;
+    
+	define-nueva-instruccion pinta como
+    inicio
+    	mientras frente-libre o derecha-libre hacer
+        inicio
+        	si no-junto-a-zumbador entonces
+            	deja-zumbador;
+                
+            si frente-libre entonces
+            inicio
+            	avanza;
+            fin
+            sino
+            inicio
+            	sal-de-instruccion;
+            fin;
+
+            si derecha-libre entonces
+            inicio
+            	gira(3);
+                avanza;
+                gira-izquierda;
+            fin
+            sino
+            inicio
+            	sal-de-instruccion;
+            fin;            
+        fin;
+    fin;
+    
+    define-nueva-instruccion siguiente como
+    inicio
+    	mientras no-orientado-al-este hacer
+        	gira-izquierda;
+    	mientras frente-libre hacer
+			avanza;
+        gira-izquierda;
+        mientras frente-libre hacer
+        	avanza;
+        gira(2);
+    fin;
+    
+    define-nueva-instruccion siguiente2 como
+    inicio
+    	mientras no-orientado-al-este hacer
+        	gira-izquierda;
+    	mientras frente-libre hacer
+			avanza;
+        gira(3);
+        mientras frente-libre hacer
+        	avanza;
+    	gira(2);
+    fin;
+
+    define-nueva-instruccion siguiente3 como
+    inicio
+    	mientras no-orientado-al-oeste hacer
+        	gira-izquierda;
+    	mientras frente-libre hacer
+			avanza;
+        gira(3);
+        mientras frente-libre hacer
+        	avanza;
+    	gira(2);
+    fin;
+
+
+    define-nueva-instruccion pinta2 como
+    inicio
+    	mientras frente-libre o izquierda-libre hacer
+        inicio
+        	si no-junto-a-zumbador entonces
+            	deja-zumbador;
+                
+            si frente-libre entonces
+            inicio
+            	avanza;
+            fin
+            sino
+            inicio
+            	sal-de-instruccion;
+            fin;
+
+            si izquierda-libre entonces
+            inicio
+            	gira-izquierda;
+                avanza;
+                gira(3);
+            fin
+            sino
+            inicio
+            	sal-de-instruccion;
+            fin;            
+        fin;
+    fin;
+    
+    inicia-ejecucion
+    	pinta;        
+        siguiente;
+        pinta;
+        siguiente2;
+        pinta2;
+        siguiente3;
+        pinta2;
+        apagate;
+    termina-ejecucion
+finalizar-programa

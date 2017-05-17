@@ -1,0 +1,22 @@
+iniciar-programa
+	define-nueva-instruccion superavanza(n) como inicio
+    	repetir n veces deja-zumbador;
+        si frente-libre entonces inicio
+        	avanza;
+        fin sino inicio
+        	si izquierda-bloqueada entonces apagate;
+            gira-izquierda;
+            avanza;
+            gira-izquierda;
+            mientras frente-libre hacer avanza;
+            gira-izquierda;
+            gira-izquierda;
+        fin;
+        superavanza(sucede(n));
+    fin;
+
+    inicia-ejecucion
+        superavanza(1);
+        apagate;
+    termina-ejecucion
+finalizar-programa

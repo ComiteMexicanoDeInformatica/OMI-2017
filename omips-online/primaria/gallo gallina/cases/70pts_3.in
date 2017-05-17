@@ -1,0 +1,37 @@
+<ejecucion>
+	<condiciones instruccionesMaximasAEjecutar="10000000" longitudStack="65000">
+		<comando nombre="AVANZA" maximoNumeroDeEjecuciones="4" />	
+	</condiciones>
+	<mundos>
+		<mundo nombre="mundo_0" ancho="100" alto="100">
+			<monton x="10" y="14" zumbadores="1"></monton>
+			<pared x1="9" y1="5" x2="10"></pared>
+			<pared x1="9" y1="5" y2="6"></pared>
+			<pared x1="10" y1="5" y2="6"></pared>
+			<pared x1="9" y1="6" y2="7"></pared>
+			<pared x1="10" y1="6" y2="7"></pared>
+			<pared x1="9" y1="7" y2="8"></pared>
+			<pared x1="10" y1="7" y2="8"></pared>
+			<pared x1="9" y1="8" y2="9"></pared>
+			<pared x1="10" y1="8" y2="9"></pared>
+			<pared x1="9" y1="9" y2="10"></pared>
+			<pared x1="10" y1="9" y2="10"></pared>
+			<pared x1="9" y1="10" y2="11"></pared>
+			<pared x1="10" y1="10" y2="11"></pared>
+			<pared x1="9" y1="11" y2="12"></pared>
+			<pared x1="10" y1="11" y2="12"></pared>
+			<pared x1="9" y1="12" y2="13"></pared>
+			<pared x1="10" y1="12" y2="13"></pared>
+			<pared x1="9" y1="13" y2="14"></pared>
+			<pared x1="9" y1="14" x2="10"></pared>
+			<pared x1="10" y1="13" y2="14"></pared>
+			<posicionDump x="10" y="14"></posicionDump>
+		</mundo>
+	</mundos>
+	<programas tipoEjecucion="CONTINUA" intruccionesCambioContexto="1" milisegundosParaPasoAutomatico="0">
+		<programa nombre="p1" ruta="{$2$}" mundoDeEjecucion="mundo_0" xKarel="10" yKarel="10" direccionKarel="OESTE" mochilaKarel="0">
+			<despliega tipo="MUNDO"></despliega>
+			<despliega tipo="POSICION"></despliega>
+		</programa>
+	</programas>
+</ejecucion>

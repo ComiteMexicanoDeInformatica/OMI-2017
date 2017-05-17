@@ -1,0 +1,115 @@
+class program {
+
+    void norte() {
+    	while(!facingNorth) turnleft();
+    }
+    void sur() {
+    	while(!facingSouth) turnleft();
+    }
+    void este() {
+    	while(!facingEast) turnleft();
+    }
+    void oeste() {
+    	while(!facingWest) turnleft();
+    }
+    void gira(a) {
+    	iterate(a) turnleft();
+    }
+
+
+	void moveForward() {
+    	while(nextToABeeper && frontIsClear) move();
+        if(!nextToABeeper) {
+        	gira(2);
+            move();
+            gira(2);
+        }
+        gira(2);
+    }
+
+	void multiplica(x) {
+    	if(nextToABeeper) {
+        	pickbeeper();
+            multiplica(x);
+            iterate(x) putbeeper();
+        }
+    }
+
+	void copy(x) {
+    	if(nextToABeeper) {
+        	pickbeeper();
+            copy(succ(x));
+            putbeeper();
+        } else {
+        	iterate(x) putbeeper();
+            move();
+            if(nextToABeeper) {
+            	copy(0);
+                move();
+            } else {
+            	este();
+                move();
+                moveForward();
+                norte();
+                move();
+            }
+        }
+    }
+
+	void row(x) {
+    	if(nextToABeeper) {
+        	pickbeeper();
+            row(succ(x));
+        } else {
+        	iterate(x) putbeeper();
+            if(frontIsClear) {
+            	move();
+                if(nextToABeeper) row(0);
+            }
+            oeste();
+            while(frontIsClear) move();
+            norte();
+            move();
+            moveForward();
+            copy(0);
+            sur();
+            while(frontIsClear) {
+            	multiplica(x);
+                move();
+            }
+            while(nextToABeeper) pickbeeper();
+        }
+    }
+    
+    void recover(x) {
+    	if(nextToABeeper) {
+        	pickbeeper();
+            recover(succ(x));
+            putbeeper();
+        } else {
+        	iterate(x) putbeeper();
+            move();
+            if(nextToABeeper) {
+            	recover(0);
+                move();
+            } else {
+            	este();
+                move();
+                row(0);
+                este();
+            }
+        }
+    }
+
+    program () {
+    	este();
+        move();
+        moveForward();
+        oeste();
+        recover(0);
+        oeste();
+        while(frontIsClear) move();
+        norte();
+        turnoff();
+    }
+}

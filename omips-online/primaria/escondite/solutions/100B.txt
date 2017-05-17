@@ -1,0 +1,85 @@
+class program {
+    
+    void norte(){
+        while(notFacingNorth) turnleft();
+    }
+    
+    void este(){
+        while(notFacingEast) turnleft();
+    }
+    
+    void sur(){
+        while(notFacingSouth) turnleft();
+    }
+    
+    void oeste(){
+        while(notFacingWest) turnleft();
+    }
+    
+    void gira(n){
+        iterate(n) turnleft();
+    }
+    
+    void buscaSalida(){
+        este();
+        while(!leftIsClear){
+            if(frontIsClear){
+                move();
+            }else{
+                norte();
+                return();
+            }
+        }
+        norte();
+    }
+    
+    void llegaPared(){
+        while(frontIsClear) move();
+    }
+    
+    void acomodate(){
+        if(frontIsClear) move();
+        este();
+        llegaPared();
+        sur();
+        llegaPared();
+        oeste();
+        while(frontIsClear && leftIsBlocked) move();
+        if(leftIsClear){
+            turnleft();
+            move();
+            gira(3);
+        }
+    }
+    
+    void cruza_pared(){
+        norte();
+        move();
+        turnleft();
+        move();
+        while(leftIsBlocked) move();
+        sur();
+        move();
+        oeste();
+    }
+    
+    void busca(){
+        while(facingWest){
+          if(frontIsBlocked){
+              if(rightIsBlocked){
+                  turnoff();
+              }
+              cruza_pared();
+          }else{
+              move();
+          }
+        }
+    }
+    
+    program () {
+        buscaSalida();
+        acomodate();
+        busca();
+        turnoff();
+    }
+}

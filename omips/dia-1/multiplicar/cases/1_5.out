@@ -1,0 +1,49 @@
+<resultados>
+	<mundos>
+		<mundo nombre="mundo_0">
+			<linea fila="40" compresionDeCeros="true">(2) 1769 </linea>
+			<linea fila="39" compresionDeCeros="true">(2) 1595 </linea>
+			<linea fila="38" compresionDeCeros="true">(2) 261 </linea>
+			<linea fila="37" compresionDeCeros="true">(2) 522 </linea>
+			<linea fila="36" compresionDeCeros="true">(2) 1537 </linea>
+			<linea fila="35" compresionDeCeros="true">(2) 841 </linea>
+			<linea fila="34" compresionDeCeros="true">(2) 2204 </linea>
+			<linea fila="33" compresionDeCeros="true">(2) 58 </linea>
+			<linea fila="32" compresionDeCeros="true">(2) 1885 </linea>
+			<linea fila="31" compresionDeCeros="true">(2) 1247 </linea>
+			<linea fila="30" compresionDeCeros="true">(2) 2117 </linea>
+			<linea fila="29" compresionDeCeros="true">(2) 290 </linea>
+			<linea fila="28" compresionDeCeros="true">(2) 406 </linea>
+			<linea fila="27" compresionDeCeros="true">(2) 1566 </linea>
+			<linea fila="26" compresionDeCeros="true">(2) 1189 </linea>
+			<linea fila="25" compresionDeCeros="true">(2) 2146 </linea>
+			<linea fila="24" compresionDeCeros="true">(2) 1798 </linea>
+			<linea fila="23" compresionDeCeros="true">(2) 754 </linea>
+			<linea fila="22" compresionDeCeros="true">(2) 2813 </linea>
+			<linea fila="21" compresionDeCeros="true">(2) 2291 </linea>
+			<linea fila="20" compresionDeCeros="true">(2) 1769 </linea>
+			<linea fila="19" compresionDeCeros="true">(2) 2233 </linea>
+			<linea fila="18" compresionDeCeros="true">(2) 2088 </linea>
+			<linea fila="17" compresionDeCeros="true">(2) 1392 </linea>
+			<linea fila="16" compresionDeCeros="true">(2) 2378 </linea>
+			<linea fila="15" compresionDeCeros="true">(2) 174 </linea>
+			<linea fila="14" compresionDeCeros="true">(2) 2697 </linea>
+			<linea fila="13" compresionDeCeros="true">(2) 1305 </linea>
+			<linea fila="12" compresionDeCeros="true">(2) 2755 </linea>
+			<linea fila="11" compresionDeCeros="true">(2) 2349 </linea>
+			<linea fila="10" compresionDeCeros="true">(2) 261 </linea>
+			<linea fila="9" compresionDeCeros="true">(2) 232 </linea>
+			<linea fila="8" compresionDeCeros="true">(2) 203 </linea>
+			<linea fila="7" compresionDeCeros="true">(2) 174 </linea>
+			<linea fila="6" compresionDeCeros="true">(2) 145 </linea>
+			<linea fila="5" compresionDeCeros="true">(2) 116 </linea>
+			<linea fila="4" compresionDeCeros="true">(2) 87 </linea>
+			<linea fila="3" compresionDeCeros="true">(2) 58 </linea>
+			<linea fila="2" compresionDeCeros="true">(2) 29 </linea>
+		</mundo>
+	</mundos>
+	<programas>
+		<programa nombre="p1" resultadoEjecucion="FIN PROGRAMA"/>
+	</programas>
+</resultados>
+

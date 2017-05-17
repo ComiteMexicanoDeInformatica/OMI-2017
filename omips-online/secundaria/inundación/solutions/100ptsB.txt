@@ -1,0 +1,70 @@
+iniciar-programa
+	define-nueva-instruccion avanza-pared como inicio 
+    	mientras frente-libre hacer avanza;
+    fin;
+    
+    define-nueva-instruccion gira-derecha como inicio
+    	repetir 3 veces gira-izquierda;
+    fin;
+    
+    define-nueva-instruccion esquina como inicio
+    	mientras no-orientado-al-norte hacer gira-izquierda;
+        avanza-pared;
+        gira-izquierda;
+        avanza-pared;
+    fin;
+    
+    define-nueva-instruccion avanza-deja como inicio
+    	mientras frente-libre hacer inicio
+        	si no junto-a-zumbador entonces inicio
+            	deja-zumbador;
+            fin;
+            avanza;
+        fin;
+        si no junto-a-zumbador entonces inicio
+            deja-zumbador;
+        fin;
+     fin;
+     
+     define-nueva-instruccion baja como inicio
+     	si frente-libre entonces inicio
+        	avanza;
+        fin sino inicio
+        	gira-izquierda;
+            mientras derecha-bloqueada y frente-libre hacer avanza;
+            si derecha-bloqueada entonces apagate;
+            gira-derecha;
+            avanza;
+        fin;
+     fin;
+
+    inicia-ejecucion
+        esquina;
+        gira-izquierda;
+        avanza-pared;
+        gira-izquierda;
+        avanza-deja;
+        gira-izquierda;
+        repetir 3 veces inicio
+        	avanza-pared;
+            gira-derecha;
+        fin;
+        avanza-deja;
+        esquina;
+        gira-izquierda;
+        mientras no-junto-a-zumbador hacer avanza;
+        repetir 100 veces inicio
+        	baja;
+            si no-junto-a-zumbador entonces inicio
+            	gira-izquierda;
+                avanza-deja;
+                gira-izquierda;
+                gira-izquierda;
+                avanza-pared;
+                gira-izquierda;
+            fin;
+        fin;
+        
+        apagate;
+    termina-ejecucion
+finalizar-programa

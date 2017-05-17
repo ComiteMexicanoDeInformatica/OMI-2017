@@ -1,0 +1,28 @@
+class program {
+
+	void avanza(n){
+    	iterate(n)
+        	putbeeper();
+            
+        if(frontIsClear){
+        	move();
+            avanza(succ(n));
+        } else {
+         	if(leftIsClear){
+            	turnleft();
+                move();
+                turnleft();
+                while(frontIsClear)
+                	move();
+                turnleft();
+                turnleft();
+                avanza(succ(n));
+            }
+        }
+    }
+    
+    program () {
+        avanza(1);
+        turnoff();
+    }
+}

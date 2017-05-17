@@ -1,0 +1,49 @@
+iniciar-programa
+	define-nueva-instruccion gira-derecha como
+    inicio
+    	gira-izquierda;
+        gira-izquierda;
+        gira-izquierda;
+    fin;
+
+	define-nueva-instruccion gira como
+    inicio
+    	mientras no-orientado-al-norte hacer inicio
+            	gira-izquierda;
+            fin;
+
+        	mientras junto-a-zumbador hacer inicio
+            	coge-zumbador;
+                gira-izquierda;
+            fin;
+    fin;
+
+	define-nueva-instruccion recorre como
+    inicio
+    	si junto-a-zumbador entonces inicio
+        	gira;
+        fin
+        sino inicio
+	    	mientras frente-libre y no-junto-a-zumbador hacer inicio
+    	    	avanza;
+        	fin;
+	        si orientado-al-este y izquierda-libre y no-junto-a-zumbador entonces inicio
+        		gira-izquierda;
+            	avanza;
+	            gira-izquierda;
+    	    fin
+        	sino si orientado-al-oeste y derecha-libre y no-junto-a-zumbador entonces inicio
+	        	gira-derecha;
+    	        avanza;
+        	    gira-derecha;
+	        fin;
+    	    recorre;
+    	fin;
+    fin;
+    inicia-ejecucion
+        mientras no-orientado-al-este hacer
+        	gira-izquierda;
+        recorre;
+        apagate;
+    termina-ejecucion
+finalizar-programa

@@ -1,0 +1,159 @@
+iniciar-programa
+
+	define-nueva-instruccion norte como inicio
+    	mientras no-orientado-al-norte hacer inicio
+        	gira-izquierda;
+        fin;
+    fin;
+    
+    define-nueva-instruccion este como inicio
+    	mientras no-orientado-al-este hacer inicio
+        	gira-izquierda;
+        fin;
+    fin;
+    
+    define-nueva-instruccion oeste como inicio
+    	mientras no-orientado-al-oeste hacer inicio
+        	gira-izquierda;
+        fin;
+    fin;
+    
+    define-nueva-instruccion sur como inicio
+    	mientras no-orientado-al-sur hacer inicio
+        	gira-izquierda;
+        fin;
+    fin;
+    
+    define-nueva-instruccion deja(n) como inicio
+    	repetir n veces inicio
+        	deja-zumbador;
+        fin;
+    fin;
+    
+    define-nueva-instruccion encuentraSiguiente como inicio
+    	avanza;
+        mientras no-junto-a-zumbador y frente-libre hacer inicio
+        	avanza;
+        fin;
+    fin;
+    
+    define-nueva-instruccion copia(n) como inicio
+    	si junto-a-zumbador entonces inicio
+        	coge-zumbador;
+            copia(sucede(n));
+        fin sino inicio
+        	deja(n);
+            norte;
+            avanza;
+            deja(n);
+            sur;
+            avanza;
+            este;
+        fin;
+    fin;
+    
+    (*
+    Si lo que trae en parámetro es mayor al montón de zumbadores
+    sobre el que está parado, termina orientado al oeste, de lo 
+    contrario termina orientado al este.
+    *)
+    define-nueva-instruccion compara(n) como inicio
+    	si no si-es-cero(n) y junto-a-zumbador entonces inicio
+        	coge-zumbador;
+            compara(precede(n));
+            deja-zumbador;
+        fin sino inicio
+        	si no si-es-cero(n) entonces inicio
+            	oeste;
+            fin;
+        fin;
+    fin;
+    
+    (*
+    Sube el mayor valor entre lo que trae en parámetro
+    (que representa el valor del montón anterior) y el 
+    valor sobre el que se encuentra parado. Comienza y
+    termina parado en la misma posición.
+    *)
+    define-nueva-instruccion subeMayor(n) como inicio
+    	compara(n);
+        si orientado-al-oeste entonces inicio
+        	encuentraSiguiente;
+            copia(0);
+            encuentraSiguiente;
+        fin sino inicio
+        	copia(0);
+        fin;
+    fin;
+    
+    (*
+    Simula la batalla entre el montón de zumbadores sobre el 
+    que se encuentra parado y el siguiente montón (a la derecha).
+    Si no tiene pareja para la batalla, sube automáticamente.
+    Comienza parado sobre el primer montón. Termina parado sobre 
+    el segundo, si es que existe un segundo montón.
+    *)
+    define-nueva-instruccion simulaBatalla(n) como inicio
+    	si junto-a-zumbador entonces inicio
+        	coge-zumbador;
+            simulaBatalla(sucede(n));
+        fin sino inicio
+        	deja(n);
+            encuentraSiguiente;
+            si no-junto-a-zumbador entonces inicio (*No tiene pareja, sube automáticamente*)
+            	oeste;
+                encuentraSiguiente;
+                copia(0);
+            fin sino inicio
+            	subeMayor(n);
+            fin;
+        fin;
+    fin;
+    
+    (*
+    	Simula una ronda del torneo. Comienza parado sobre 
+        el primer montón de zumbadores del renglón, orientado
+        al este.
+    *)
+    define-nueva-instruccion simulaRonda como inicio
+    	mientras junto-a-zumbador y frente-libre hacer inicio
+        	simulaBatalla(0);
+            si frente-libre entonces inicio
+              encuentraSiguiente;
+              si frente-bloqueado entonces inicio (*Este montón de zumb. no tiene pareja para la batalla.*)
+                  copia(0);
+              fin;
+            fin;
+        fin;
+    fin;
+    
+    define-nueva-instruccion subeRenglon como inicio
+    	norte;
+        avanza;
+        oeste;
+        mientras frente-libre hacer inicio
+        	avanza;
+        fin;
+        este;
+        mientras no-junto-a-zumbador y frente-libre hacer inicio
+        	avanza;
+        fin;
+    fin;
+    
+    inicia-ejecucion
+        este;
+        
+        mientras junto-a-zumbador y frente-libre hacer inicio
+            encuentraSiguiente;
+            si junto-a-zumbador entonces inicio (*Aún no hay un ganador del torneo.*)
+             	oeste;
+             	encuentraSiguiente;
+             	este;
+             	simulaRonda;
+             	subeRenglon;
+            fin;
+        fin;
+        
+        apagate;
+    termina-ejecucion
+finalizar-programa

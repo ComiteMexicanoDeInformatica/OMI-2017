@@ -1,0 +1,91 @@
+class program {
+
+	void gira(n){
+    	iterate(n)
+        	turnleft();
+    }
+    
+    void avanzaPared(){
+    	while(frontIsClear)
+        	move();
+    }
+    
+    void siguiente(){
+    	gira(2);
+        avanzaPared();
+        gira(3);
+        move();
+    }
+    
+    void avanzaAdelante(){
+    	if(frontIsClear)
+        	move();
+        else {
+        	gira(2);
+            while(nextToABeeper && frontIsClear)
+            	move();
+            gira(2);
+            if(notNextToABeeper)
+            	move();
+            gira(1);
+            move();
+            gira(3);
+        }
+    }
+    
+    void avanzaAtras(){
+    	if(frontIsClear){
+    		move();
+        	if(notNextToABeeper){
+        		siguiente();
+                gira(3);
+        	}
+        } else {
+        	siguiente();
+            gira(3);
+        }
+    }
+    
+    void limpia(){
+    	if(notNextToABeeper)
+    		avanzaAtras();
+    	while(frontIsClear || leftIsClear){
+        	pickbeeper();
+            avanzaAtras();
+        }
+        pickbeeper();
+    }
+    
+    void llena(){
+    	while(anyBeepersInBeeperBag && (frontIsClear || leftIsClear)){
+    		putbeeper();
+        	avanzaAdelante();
+        } 
+        if(anyBeepersInBeeperBag)
+        	putbeeper();
+    }
+
+	void intenta(){
+    	gira(3);
+        avanzaPared();
+        
+        if(leftIsClear)
+        	siguiente();
+        else {
+        	gira(2);
+        	llena();
+        
+  			if(anyBeepersInBeeperBag || notNextToABeeper){
+        		gira(2);
+            	limpia();
+                siguiente();
+        	}
+        }
+    }
+
+    program () {
+        while(notNextToABeeper)
+        	intenta();
+        turnoff();
+    }
+}

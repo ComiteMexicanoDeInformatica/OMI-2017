@@ -1,0 +1,86 @@
+iniciar-programa
+    define-nueva-instruccion media-vuelta como inicio
+        repetir 2 veces gira-izquierda;
+    fin;
+    
+    define-nueva-instruccion gira-derecha como inicio
+        repetir 3 veces gira-izquierda;
+    fin;
+    
+    define-nueva-instruccion avanza-hasta-pared como inicio
+        mientras frente-libre hacer avanza;
+    fin;
+
+    define-nueva-instruccion conteo-de-pastel como inicio
+        si junto-a-zumbador entonces inicio
+            coge-zumbador;
+            conteo-de-pastel;
+            si orientado-al-este entonces inicio
+                avanza;
+            fin sino inicio
+                gira-izquierda;
+            fin;
+        fin sino inicio
+            gira-izquierda;
+            avanza;
+            gira-izquierda;
+            avanza-hasta-pared;
+            gira-izquierda;
+        fin;
+    fin;
+    
+    define-nueva-instruccion clasifica-pastel como inicio
+        conteo-de-pastel;
+        deja-zumbador;
+        media-vuelta;
+        avanza-hasta-pared;
+        gira-izquierda;
+        avanza;
+        gira-izquierda;
+    fin;
+    
+    define-nueva-instruccion cuenta-votos como inicio
+        si junto-a-zumbador entonces inicio
+            coge-zumbador;
+            cuenta-votos;
+            deja-zumbador;
+            si frente-libre entonces avanza;
+        fin sino inicio
+            avanza;
+            media-vuelta;
+        fin;
+    fin;
+    
+    define-nueva-instruccion pinta-grafica-barra como inicio
+        si junto-a-zumbador entonces inicio
+            gira-izquierda;
+            cuenta-votos;
+            media-vuelta;
+            avanza-hasta-pared;
+            media-vuelta;
+            avanza;
+            gira-izquierda;
+        fin;
+    fin;
+    
+    inicia-ejecucion
+        gira-derecha;
+        si junto-a-zumbador entonces
+            clasifica-pastel;
+        mientras frente-libre hacer inicio
+            avanza;
+            si junto-a-zumbador entonces
+                clasifica-pastel;
+        fin;
+        
+        gira-izquierda;
+        avanza;
+        gira-izquierda;
+        mientras frente-libre hacer inicio
+            pinta-grafica-barra;
+            avanza;
+        fin;
+        pinta-grafica-barra;
+        apagate;
+    termina-ejecucion
+finalizar-programa

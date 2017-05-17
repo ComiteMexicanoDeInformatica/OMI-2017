@@ -1,0 +1,7 @@
+*.zip
+.DS_Store
+*~
+*.kx
+*.cbp
+*.depend
+*.layout

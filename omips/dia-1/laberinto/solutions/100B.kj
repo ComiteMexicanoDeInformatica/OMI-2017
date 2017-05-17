@@ -1,0 +1,106 @@
+class program {
+void north(){ while( notFacingNorth ) turnleft(); }
+void south(){ while( notFacingSouth ) turnleft(); }
+void east(){ while( notFacingEast ) turnleft(); }
+void west(){ while( notFacingWest ) turnleft(); }
+void turn(n){ iterate(n) turnleft(); }
+void gira(){
+    if( leftIsClear || rightIsClear  ){
+        if( leftIsClear ) turnleft();
+        else turn(3);
+    }
+}
+void pos(){
+    if( leftIsClear || rightIsClear  ){
+        gira();
+        while( frontIsClear ) move();
+        if( leftIsClear || rightIsClear ) gira();
+        else {
+            turn(2);
+            iterate(3){
+                while( frontIsClear ) move();
+                gira();
+            }
+            turn(2);
+        }
+    }
+    else {
+        turn(2);
+        iterate(2){
+            while( frontIsClear ) move();
+            gira();
+        }
+        turn(2);
+    }
+}
+void cuenta2(n){
+    if( !iszero(n) && frontIsClear ){
+        move();
+        cuenta2(pred(n));
+    }
+    else {
+        if( iszero(n) ){
+            if( frontIsClear ){
+                north();
+                turnoff();
+            }
+            else {
+                if( leftIsClear || rightIsClear ) south();
+                else north();
+                turnoff();
+            }
+        }
+        else {
+            south();
+            turnoff();
+        }
+    }
+}
+void cuenta3(n){
+    if( !iszero(n) && frontIsClear ){
+        move();
+        cuenta3(pred(n));
+    }
+    else {
+        if( iszero(n) ){
+            if( frontIsClear ){
+                south();
+                turnoff();
+            }
+            else {
+                if( leftIsClear || rightIsClear ) north();
+                else south();
+                turnoff();
+            }
+        }
+        else {
+            north();
+            turnoff();
+        }          
+    }
+}
+void cuenta(n){
+    if( frontIsClear ){
+        move();
+        cuenta(succ(n));
+    }
+    else {
+        pos();
+        if( frontIsClear ){
+            cuenta2(n);
+        }
+        else {
+            turn(2);
+            cuenta3(n);
+        }
+    }
+}
+program() {
+    turn(2);
+    while( frontIsClear ) move();
+    turn(2);
+    cuenta(0);
+    turnoff();
+}
+
+}

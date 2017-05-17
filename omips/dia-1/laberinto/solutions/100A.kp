@@ -1,0 +1,72 @@
+iniciar-programa
+	define-nueva-instruccion superavanza como inicio
+    	si frente-libre entonces inicio
+        	avanza;
+        fin sino si izquierda-libre entonces inicio
+        	gira-izquierda;
+        fin sino si derecha-libre entonces inicio
+        	repetir 3 veces gira-izquierda;
+        fin;
+    fin;
+    
+    define-nueva-instruccion fondo como inicio
+    	mientras (frente-libre o derecha-libre o izquierda-libre) hacer inicio
+        	superavanza;
+        fin;
+    fin;
+    
+    define-nueva-instruccion resta-cuarta-recta(n) como inicio
+    	si si-es-cero(n) entonces inicio
+        	mientras no-orientado-al-sur hacer gira-izquierda;
+            apagate;
+        fin;
+        si frente-libre entonces inicio
+        	avanza;
+            resta-cuarta-recta(precede(n));
+        fin sino inicio
+        	mientras no-orientado-al-norte hacer gira-izquierda;
+        fin;
+    fin;
+    
+    define-nueva-instruccion resta-tercer-recta(n) como inicio
+    	si si-es-cero(n) entonces inicio
+        	mientras no-orientado-al-sur hacer gira-izquierda;
+            apagate;
+        fin;
+        si frente-libre entonces inicio
+        	avanza;
+            resta-tercer-recta(precede(n));
+        fin sino inicio
+        	superavanza;
+            resta-cuarta-recta(n);
+        fin;
+    fin;
+    
+    define-nueva-instruccion suma-segunda-recta(n) como inicio
+    	si frente-libre entonces inicio
+        	avanza;
+            suma-segunda-recta(sucede(n));
+        fin sino inicio
+        	superavanza;
+            resta-tercer-recta(n);
+        fin;
+    fin;
+    
+    define-nueva-instruccion suma-primer-recta(n) como inicio
+    	si frente-libre entonces inicio
+        	avanza;
+            suma-primer-recta(sucede(n));
+        fin sino inicio
+        	superavanza;
+            suma-segunda-recta(n);
+        fin;
+    fin;    
+
+    inicia-ejecucion
+        fondo;
+        gira-izquierda;
+        gira-izquierda;
+        suma-primer-recta(0);
+        apagate;
+    termina-ejecucion
+finalizar-programa

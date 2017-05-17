@@ -1,0 +1,45 @@
+class program {
+
+	void gira(n){
+    	iterate(n)
+        	turnleft();
+    }
+    
+    void deja(){
+    	if(notNextToABeeper)
+        	putbeeper();
+    }
+    
+    void diagonal(){
+    	while(frontIsClear && rightIsClear){
+        	deja();
+            move();
+            gira(3);
+            move();
+            gira(1);
+        }
+        
+        deja();
+        gira(2);
+        
+        while(frontIsClear && rightIsClear){
+            move();
+            gira(3);
+            move();
+            gira(1);
+        }
+        gira(2);
+    }
+    
+    program () {
+    	iterate(4){
+        	diagonal();
+            
+            while(frontIsClear)
+            	move();
+                
+            gira(3);
+        }
+        turnoff();
+    }
+}

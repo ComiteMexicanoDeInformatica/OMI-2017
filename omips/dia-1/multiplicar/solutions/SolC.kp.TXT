@@ -1,0 +1,83 @@
+iniciar-programa
+
+    define-nueva-instruccion norte como mientras no-orientado-al-norte hacer gira-izquierda;
+    define-nueva-instruccion sur como mientras no-orientado-al-sur hacer gira-izquierda;
+    define-nueva-instruccion oeste como mientras no-orientado-al-oeste hacer gira-izquierda;
+    define-nueva-instruccion este como mientras no-orientado-al-este hacer gira-izquierda;
+
+    define-nueva-instruccion pared como mientras frente-libre hacer avanza;
+
+    define-nueva-instruccion aprende-y-deja(n) como inicio
+        si junto-a-zumbador entonces inicio
+            coge-zumbador;
+            aprende-y-deja(sucede(n));
+        fin
+        sino inicio
+            si orientado-al-este entonces inicio
+                repetir n veces deja-zumbador;
+                mientras junto-a-zumbador y frente-libre hacer avanza;
+            fin
+            sino pared;
+
+            si no-junto-a-zumbador entonces inicio
+                si orientado-al-este entonces inicio
+                    oeste;
+                    avanza;
+                fin;
+            fin;
+
+            oeste;
+
+            repetir n veces deja-zumbador;
+        fin;
+    fin;
+
+    define-nueva-instruccion multiplica como inicio
+        si junto-a-zumbador entonces inicio
+            coge-zumbador;
+            mientras frente-libre hacer inicio
+                avanza;
+                este;
+                aprende-y-deja(0);
+                pared;
+                norte;
+            fin;
+        fin
+        sino inicio
+            sur;
+            pared;
+        fin;
+    fin;
+
+    define-nueva-instruccion marca(b) como inicio
+        norte;
+        mientras frente-libre hacer inicio
+            avanza;
+            si si-es-cero(b) entonces coge-zumbador
+            sino deja-zumbador;
+        fin;
+        sur;
+        pared;
+    fin;
+
+    define-nueva-instruccion escoge-factor como inicio
+        este;
+        mientras no-junto-a-zumbador y frente-libre hacer avanza;
+        si junto-a-zumbador entonces inicio
+            marca(1);
+            oeste;
+            aprende-y-deja(0);
+            norte;
+            multiplica;
+            marca(0);
+        fin
+        sino
+            apagate;
+    fin;
+
+    inicia-ejecucion
+        repetir 100 veces escoge-factor;
+
+        apagate;
+    termina-ejecucion
+finalizar-programa

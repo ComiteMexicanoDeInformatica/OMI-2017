@@ -1,0 +1,120 @@
+iniciar-programa
+define-nueva-instruccion sur como inicio
+	mientras no-orientado-al-sur hacer inicio
+		gira-izquierda;
+	fin;
+fin;
+
+define-nueva-instruccion norte como inicio
+	mientras no-orientado-al-norte hacer inicio
+		gira-izquierda;
+	fin;
+fin;
+define-nueva-instruccion este como inicio
+	mientras no-orientado-al-este hacer inicio
+		gira-izquierda;
+	fin;
+fin;
+define-nueva-instruccion oeste como inicio
+	mientras no-orientado-al-oeste hacer inicio
+		gira-izquierda;
+	fin;
+fin;
+define-nueva-instruccion armaTorre(n) como inicio 
+	si junto-a-zumbador entonces inicio
+    	coge-zumbador;
+        armaTorre(sucede(n));
+    fin sino inicio 
+    	oeste;
+        avanza;
+        norte;
+        avanza;
+        mientras junto-a-zumbador y frente-libre hacer inicio 
+        	avanza;
+        fin;
+        sur;
+        si no-junto-a-zumbador entonces inicio
+        	avanza;
+        fin;
+        este;
+        avanza;
+        sur;
+        mientras frente-libre hacer inicio 
+        	repetir n veces inicio
+            	deja-zumbador;
+            fin;
+            avanza;
+        fin;
+        repetir n veces inicio
+        	deja-zumbador;
+        fin;
+    fin;
+fin;
+define-nueva-instruccion construyeTorres como inicio 
+	este;
+    avanza;
+    mientras junto-a-zumbador y frente-libre hacer inicio 
+    	armaTorre(0);
+        este;
+        avanza;
+    fin;
+    si junto-a-zumbador entonces inicio
+    	armaTorre(0);
+    fin;
+fin;
+define-nueva-instruccion multiplicar(n) como inicio
+	si junto-a-zumbador entonces inicio 
+    	coge-zumbador;
+        multiplicar(n);
+        repetir n veces inicio
+        	deja-zumbador;
+        fin;
+    fin;
+fin;
+define-nueva-instruccion multiplicaFila(n) como inicio
+	si junto-a-zumbador entonces inicio 
+    	coge-zumbador;
+      	multiplicaFila (sucede(n));
+    fin sino inicio 
+    	deja-zumbador;
+        este;
+        mientras frente-libre y junto-a-zumbador hacer inicio 
+        	multiplicar(n);
+            avanza;
+        fin;
+        si junto-a-zumbador entonces inicio
+        	multiplicar (n);
+        fin;
+        oeste;
+        mientras frente-libre hacer inicio 
+        	avanza;
+        fin;
+    fin;
+fin;
+define-nueva-instruccion multiplicaTodo como inicio
+	norte;
+    avanza;
+    mientras junto-a-zumbador y frente-libre  hacer inicio 
+    	multiplicaFila(0);
+        norte;
+        avanza;
+    fin;
+    si junto-a-zumbador entonces inicio
+    	multiplicaFila(0);
+    fin;
+fin;
+    inicia-ejecucion
+        construyeTorres;
+        oeste;
+        mientras frente-libre hacer inicio
+        	avanza;
+        fin;
+        multiplicaTodo;
+        sur;
+        mientras frente-libre hacer inicio 
+        	avanza;
+        fin;
+        norte;
+        apagate;
+    termina-ejecucion
+finalizar-programa

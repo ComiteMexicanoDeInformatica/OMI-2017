@@ -1,0 +1,178 @@
+class program {
+
+define half()
+{
+    turnleft();
+    turnleft();
+}
+
+define right()
+{
+    turnleft();
+    turnleft();
+    turnleft();
+}
+
+define wall()
+{
+    while(frontIsClear)
+        move();
+}
+
+define copy(x)
+{
+    if(nextToABeeper)
+    {
+        pickbeeper();
+        copy(succ(x));
+    }
+    else
+    {
+        iterate(x)
+            putbeeper();
+        move();
+        iterate(x)
+            putbeeper();
+    }
+}
+
+define fight(x)
+{
+    if(iszero(x))
+    {
+        turnleft();
+        return();
+    }
+    if(nextToABeeper)
+    {
+        pickbeeper();
+        fight(pred(x));
+        putbeeper();
+    }
+    else
+    {
+        half();
+    }
+}
+
+define noFight()
+{
+    half();
+    while(notNextToABeeper)
+        move();
+    if(frontIsClear)
+    {
+        move();
+        while(frontIsClear && notNextToABeeper)
+            move();
+        if(nextToABeeper)
+        {
+            half();
+            move();
+            while(notNextToABeeper)
+                move();
+            turnleft();
+            copy(0);
+            half();
+            move();
+            turnleft();
+        }
+        else
+        {
+            turnoff();
+        }
+    }
+    else
+    {
+        turnoff();
+    }
+}
+
+define lookFor(x)
+{
+    if(frontIsClear)
+    {
+        move();
+        while(frontIsClear && notNextToABeeper)
+            move();
+        if(notNextToABeeper)
+            noFight();
+        else
+        {
+            fight(x);
+            if(facingNorth)
+            {
+                copy(0);
+                half();
+                move();
+                turnleft();
+            }
+            else
+            {
+                if(facingWest)
+                {
+                    move();
+                    while(notNextToABeeper)
+                        move();
+                    right();
+                    copy(0);
+                    half();
+                    move();
+                    turnleft();
+                    move();
+                    while(notNextToABeeper)
+                        move();
+                }
+            }
+        }
+
+    }
+    else
+    {
+        noFight();
+    }
+}
+
+define take(x)
+{
+    if(nextToABeeper)
+    {
+        pickbeeper();
+        take(succ(x));
+    }
+    else
+    {
+        iterate(x)
+            putbeeper();
+        lookFor(x);
+    }
+}
+
+define work()
+{
+    if(nextToABeeper)
+    {
+        take(0);
+    }
+}
+
+program() {
+    right();
+    while(frontIsClear || frontIsBlocked)
+    {
+        while(frontIsClear)
+        {
+            work();
+            move();
+        }
+        work();
+        half();
+        wall();
+        right();
+        move();
+        right();
+    }
+    turnoff();
+}
+
+}

@@ -1,0 +1,206 @@
+class program {
+
+	void norte(){
+    	while(notFacingNorth) {
+       		turnleft();
+        }
+    }
+    
+    
+	void oeste(){
+    	while(notFacingWest) {
+       		turnleft();
+        }
+    }
+    
+    
+	void este(){
+    	while(notFacingEast) {
+       		turnleft();
+        }
+    }
+    
+    
+	void sur(){
+    	while(notFacingSouth) {
+       		turnleft();
+        }
+    }
+    
+    void gira(n){
+    	iterate(n) {
+        	turnleft();
+        }
+    }
+    
+    void deja(n){
+    	iterate(n) {
+        	putbeeper();
+        }
+    }
+    
+    void recoge(){
+    	while(nextToABeeper) {
+        	pickbeeper();
+        }
+    }
+    
+    void avanzaPared(){
+    	while(frontIsClear) {
+        	move();
+        }
+    }
+    
+    void avanzaMientrasZumbador(){
+    	while(nextToABeeper && frontIsClear) {
+        	move();
+        }
+    } 
+    
+    void avanzaAUltimoZumbador(){
+    	avanzaMientrasZumbador();
+        if(notNextToABeeper){
+        	gira(2);
+            move();
+            gira(2);
+        }
+    }
+    
+    void avanzaAZumbador(){
+    	while(notNextToABeeper) {
+        	move();
+        }
+    }
+    
+    void restaura(n){
+    	oeste();
+    	avanzaPared();
+        recoge();
+        deja(n);
+        este();
+        move();
+        avanzaAZumbador();
+   	}
+    
+    void mueveZumbadores(n){
+    	if(nextToABeeper){
+        	pickbeeper();
+            mueveZumbadores(succ(n));
+        } else {
+        	deja(n);
+        	norte();
+            avanzaMientrasZumbador();
+            deja(n);
+        }
+    }
+    
+    void intentaQuitar(n){
+    	if(nextToABeeper && !iszero(n)){
+        	pickbeeper();
+            intentaQuitar(pred(n));
+            if(facingSouth)
+            	putbeeper();
+        } else {
+        	if(!iszero(n)) {
+            	sur();
+            }
+        }
+    }
+    
+    void copia(n){
+    	if(nextToABeeper){
+        	pickbeeper();
+            copia(succ(n));
+        } else {
+        	putbeeper();
+        	oeste();
+            avanzaPared();
+            recoge();
+            deja(n);
+            este();
+            move();
+            avanzaAZumbador();
+            oeste();
+        }
+    }
+    
+    void llamaAMcd(n){
+    	if(nextToABeeper){
+        	pickbeeper();
+            llamaAMcd(succ(n));
+        } else {
+        	deja(n);
+        	este();
+            move();
+            avanzaAZumbador();
+            mcd(n);
+        }
+    }
+    
+    void intercambia(n){
+    	copia(0);
+        pickbeeper();
+        deja(n);
+        avanzaPared();
+        llamaAMcd(0);
+    }
+
+    void mcd(n){
+    	if(nextToABeeper){
+        	intentaQuitar(n);
+            if(facingSouth) {
+            	intercambia(n);
+            }
+            else {
+            	mcd(n);
+            }
+        } else {
+        	deja(n);
+        }
+    }	
+    
+    void resuelveRenglon(n){
+    	if(nextToABeeper){
+        	pickbeeper();
+            resuelveRenglon(succ(n));
+        } else {
+        	deja(n);
+        	sur();
+            avanzaPared();
+            este();
+            move();
+            avanzaAUltimoZumbador();
+            
+            oeste();
+            while(frontIsClear){
+            	mueveZumbadores(0);
+                mcd(n);
+                restaura(n);
+                sur();
+                avanzaPared();
+                oeste();
+                move();
+            }
+            
+            este();
+            move();
+            norte();
+            avanzaAUltimoZumbador();
+            oeste();
+            move();
+            norte();
+        }
+    } 
+
+    program () {
+    	move();
+        while(frontIsClear && nextToABeeper){
+            resuelveRenglon(0);
+            move();
+        }
+        if(nextToABeeper) {
+        	resuelveRenglon(0);
+        }
+        turnoff();
+    }
+}

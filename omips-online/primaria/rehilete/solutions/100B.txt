@@ -1,0 +1,45 @@
+class program {
+    
+    void gira(n){
+        iterate(n){
+            turnleft();
+        }
+    }
+    
+    void llega_1_1(){
+        while(notFacingSouth) turnleft();
+        while(frontIsClear) move();
+        gira(3);
+        while(frontIsClear) move();
+        gira(2);
+    }
+    
+    void busca_zumbador(){
+        while(!nextToABeeper){
+            if(frontIsClear){
+                move();
+            }else{
+                turnleft();
+                move();
+                turnleft();
+                while(frontIsClear) move();
+                gira(2);
+            }
+        }
+    }
+    
+    void orientate(){
+        while(notFacingNorth) turnleft();
+        while(nextToABeeper){
+            pickbeeper();
+            turnleft();
+        }
+    }
+    
+    program () {
+        llega_1_1();
+        busca_zumbador();
+        orientate();
+        turnoff();
+    }
+}

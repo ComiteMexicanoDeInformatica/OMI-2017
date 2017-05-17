@@ -1,0 +1,101 @@
+iniciar-programa
+    define-nueva-instruccion pared como inicio
+    	mientras frente-libre hacer avanza;
+    fin;
+    
+    define-nueva-instruccion derecha como inicio
+    	repetir 3 veces gira-izquierda;
+    fin;
+    
+    define-nueva-instruccion norte como inicio
+    	mientras no-orientado-al-norte hacer gira-izquierda;
+    fin;
+    
+    define-nueva-instruccion sur como inicio
+    	mientras no-orientado-al-sur hacer gira-izquierda;
+    fin;
+    
+    define-nueva-instruccion construye(ancho) como inicio
+    	derecha;
+        repetir ancho veces coge-zumbador;
+        repetir ancho veces inicio
+        	avanza;
+            deja-zumbador;
+        fin;
+        si frente-bloqueado y izquierda-bloqueada entonces apagate;
+        gira-izquierda;
+        gira-izquierda;
+        repetir ancho veces avanza;
+        derecha;
+        avanza;
+        construye(ancho);        
+    fin;
+    
+    define-nueva-instruccion cuenta-alto(ancho) como inicio
+    	repetir ancho veces inicio
+        	si algun-zumbador-en-la-mochila entonces inicio
+            	deja-zumbador;
+            fin sino inicio
+            	mientras junto-a-zumbador hacer coge-zumbador;
+            	sal-de-instruccion
+            fin;
+        fin;
+        si algun-zumbador-en-la-mochila y frente-libre entonces inicio
+        	avanza;
+            cuenta-alto(ancho);
+            norte;
+        	mientras junto-a-zumbador hacer coge-zumbador;
+        	si frente-libre entonces avanza;
+        fin sino inicio
+        	si frente-bloqueado  y ningun-zumbador-en-la-mochila entonces inicio
+            	gira-izquierda;
+                gira-izquierda;
+                construye(precede(ancho));
+            fin;
+        fin;
+    fin;
+    
+    define-nueva-instruccion limpia como inicio
+    	mientras junto-a-zumbador hacer coge-zumbador;
+        si frente-libre entonces inicio
+        	avanza;
+            limpia;
+            sur;
+            avanza;
+        fin sino inicio 
+        	sur;
+        fin;
+    fin;
+    
+    define-nueva-instruccion cuenta-ancho(ancho) como inicio
+    	si frente-libre entonces inicio
+        	avanza;
+            cuenta-ancho(sucede(ancho));
+        fin sino inicio
+        	gira-izquierda;
+        	cuenta-alto(ancho);
+            limpia;
+            gira-izquierda;
+            pared;
+            derecha;
+            mientras izquierda-bloqueada hacer avanza;
+            gira-izquierda;
+            pared;
+        fin;
+    fin;
+    
+    define-nueva-instruccion prueba-esquina como inicio
+    	gira-izquierda;
+        gira-izquierda;
+        cuenta-ancho(1);
+    fin;
+    
+    inicia-ejecucion
+        pared;
+        derecha;
+        pared;
+        mientras algun-zumbador-en-la-mochila hacer inicio
+        	prueba-esquina;
+        fin;
+    termina-ejecucion
+finalizar-programa

@@ -1,0 +1,127 @@
+class program {
+
+	void norte() {
+    	while(!facingNorth) turnleft();
+    }
+    void sur() {
+    	while(!facingSouth) turnleft();
+    }
+    void este() {
+    	while(!facingEast) turnleft();
+    }
+    void oeste() {
+    	while(!facingWest) turnleft();
+    }
+    void gira(a) {
+    	iterate(a) turnleft();
+    }
+
+	void goWest() {
+    	oeste();
+        while(frontIsClear) move();
+        este();
+    }
+
+	void check() {
+    	if(frontIsBlocked) {
+        	oeste();
+        } else {
+        	move();
+            while(frontIsClear && !nextToABeeper) move();
+            if(!nextToABeeper) oeste();
+        }
+    }
+    
+    void sube(x) {
+    	if(nextToABeeper) {
+        	pickbeeper();
+            sube(succ(x));
+            putbeeper();
+        } else {
+        	iterate(x) putbeeper();
+            norte();
+            move();
+        }
+    }
+    
+    void fight(x) {
+    	if(nextToABeeper) {
+        	pickbeeper();
+            fight(succ(x));
+        } else {
+        	iterate(x) putbeeper();
+            este();
+            if(frontIsBlocked) {
+            	sube(0);
+            } else {
+            	move();
+                while(!nextToABeeper && frontIsClear) move();
+                if(!nextToABeeper) {
+                	oeste();
+                    while(!nextToABeeper) move();
+                    sube(0);
+                } else {
+                    iterate(x) {
+                    	if(!nextToABeeper) oeste();
+                        if(facingEast) pickbeeper();
+                        else putbeeper();
+                    }
+                    if(facingEast) {
+                    	iterate(x) putbeeper();
+                        sube(0);
+                        sur();
+                        move();
+                        este();
+                    } else {
+                    	este();
+                        iterate(x) {
+                            if(!nextToABeeper) oeste();
+                            if(facingEast) pickbeeper();
+                            else putbeeper();
+                        }
+                        oeste();
+                        move();
+                        while(!nextToABeeper) move();
+                        sube(0);
+                        sur();
+                        move();
+                        este();
+                        move();
+                        while(!nextToABeeper) move();
+                    }
+                    if(frontIsClear) {
+                    	move();
+                        while(frontIsClear && !nextToABeeper) move();
+                        if(nextToABeeper) fight(0);
+                        else sube(0);
+                    } else {
+                    	norte();
+                        move();
+                    }
+                }
+            }
+        }
+    }
+
+	void solve() {
+    	goWest();
+        while(!nextToABeeper) move();
+        check();
+        if(facingWest) {
+            sur();
+            while(frontIsClear) move();
+            goWest();
+        } else {
+        	goWest();
+            while(!nextToABeeper) move();
+            fight(0);
+            solve();
+        }
+    }
+
+    program () {
+    	if(!nextToABeeper) turnoff();
+        solve();
+        turnoff();
+    }
+}

@@ -1,0 +1,59 @@
+<resultados>
+	<mundos>
+		<mundo nombre="mundo_0">
+			<linea fila="50" compresionDeCeros="true">(2) 320 270 290 370 260 270 210 210 300 </linea>
+			<linea fila="49" compresionDeCeros="true">(2) 256 216 232 296 208 216 168 168 240 </linea>
+			<linea fila="48" compresionDeCeros="true">(2) 1248 1053 1131 1443 1014 1053 819 819 1170 </linea>
+			<linea fila="47" compresionDeCeros="true">(2) 96 81 87 111 78 81 63 63 90 </linea>
+			<linea fila="46" compresionDeCeros="true">(2) 1152 972 1044 1332 936 972 756 756 1080 </linea>
+			<linea fila="45" compresionDeCeros="true">(2) 416 351 377 481 338 351 273 273 390 </linea>
+			<linea fila="44" compresionDeCeros="true">(2) 448 378 406 518 364 378 294 294 420 </linea>
+			<linea fila="43" compresionDeCeros="true">(2) 960 810 870 1110 780 810 630 630 900 </linea>
+			<linea fila="42" compresionDeCeros="true">(2) 672 567 609 777 546 567 441 441 630 </linea>
+			<linea fila="41" compresionDeCeros="true">(2) 896 756 812 1036 728 756 588 588 840 </linea>
+			<linea fila="40" compresionDeCeros="true">(2) 1248 1053 1131 1443 1014 1053 819 819 1170 </linea>
+			<linea fila="39" compresionDeCeros="true">(2) 256 216 232 296 208 216 168 168 240 </linea>
+			<linea fila="38" compresionDeCeros="true">(2) 1536 1296 1392 1776 1248 1296 1008 1008 1440 </linea>
+			<linea fila="37" compresionDeCeros="true">(2) 1248 1053 1131 1443 1014 1053 819 819 1170 </linea>
+			<linea fila="36" compresionDeCeros="true">(2) 544 459 493 629 442 459 357 357 510 </linea>
+			<linea fila="35" compresionDeCeros="true">(2) 1184 999 1073 1369 962 999 777 777 1110 </linea>
+			<linea fila="34" compresionDeCeros="true">(2) 128 108 116 148 104 108 84 84 120 </linea>
+			<linea fila="33" compresionDeCeros="true">(2) 896 756 812 1036 728 756 588 588 840 </linea>
+			<linea fila="32" compresionDeCeros="true">(2) 704 594 638 814 572 594 462 462 660 </linea>
+			<linea fila="31" compresionDeCeros="true">(2) 1248 1053 1131 1443 1014 1053 819 819 1170 </linea>
+			<linea fila="30" compresionDeCeros="true">(2) 1280 1080 1160 1480 1040 1080 840 840 1200 </linea>
+			<linea fila="29" compresionDeCeros="true">(2) 128 108 116 148 104 108 84 84 120 </linea>
+			<linea fila="28" compresionDeCeros="true">(2) 1344 1134 1218 1554 1092 1134 882 882 1260 </linea>
+			<linea fila="27" compresionDeCeros="true">(2) 960 810 870 1110 780 810 630 630 900 </linea>
+			<linea fila="26" compresionDeCeros="true">(2) 480 405 435 555 390 405 315 315 450 </linea>
+			<linea fila="25" compresionDeCeros="true">(2) 864 729 783 999 702 729 567 567 810 </linea>
+			<linea fila="24" compresionDeCeros="true">(2) 1440 1215 1305 1665 1170 1215 945 945 1350 </linea>
+			<linea fila="23" compresionDeCeros="true">(2) 128 108 116 148 104 108 84 84 120 </linea>
+			<linea fila="22" compresionDeCeros="true">(2) 1152 972 1044 1332 936 972 756 756 1080 </linea>
+			<linea fila="21" compresionDeCeros="true">(2) 96 81 87 111 78 81 63 63 90 </linea>
+			<linea fila="20" compresionDeCeros="true">(2) 1536 1296 1392 1776 1248 1296 1008 1008 1440 </linea>
+			<linea fila="19" compresionDeCeros="true">(2) 1504 1269 1363 1739 1222 1269 987 987 1410 </linea>
+			<linea fila="18" compresionDeCeros="true">(2) 224 189 203 259 182 189 147 147 210 </linea>
+			<linea fila="17" compresionDeCeros="true">(2) 288 243 261 333 234 243 189 189 270 </linea>
+			<linea fila="16" compresionDeCeros="true">(2) 1056 891 957 1221 858 891 693 693 990 </linea>
+			<linea fila="15" compresionDeCeros="true">(2) 1536 1296 1392 1776 1248 1296 1008 1008 1440 </linea>
+			<linea fila="14" compresionDeCeros="true">(2) 608 513 551 703 494 513 399 399 570 </linea>
+			<linea fila="13" compresionDeCeros="true">(2) 1056 891 957 1221 858 891 693 693 990 </linea>
+			<linea fila="12" compresionDeCeros="true">(2) 832 702 754 962 676 702 546 546 780 </linea>
+			<linea fila="11" compresionDeCeros="true">(2) 576 486 522 666 468 486 378 378 540 </linea>
+			<linea fila="10" compresionDeCeros="true">(2) 800 675 725 925 650 675 525 525 750 </linea>
+			<linea fila="9" compresionDeCeros="true">(2) 672 567 609 777 546 567 441 441 630 </linea>
+			<linea fila="8" compresionDeCeros="true">(2) 1248 1053 1131 1443 1014 1053 819 819 1170 </linea>
+			<linea fila="7" compresionDeCeros="true">(2) 448 378 406 518 364 378 294 294 420 </linea>
+			<linea fila="6" compresionDeCeros="true">(2) 384 324 348 444 312 324 252 252 360 </linea>
+			<linea fila="5" compresionDeCeros="true">(2) 1600 1350 1450 1850 1300 1350 1050 1050 1500 </linea>
+			<linea fila="4" compresionDeCeros="true">(2) 800 675 725 925 650 675 525 525 750 </linea>
+			<linea fila="3" compresionDeCeros="true">(2) 608 513 551 703 494 513 399 399 570 </linea>
+			<linea fila="2" compresionDeCeros="true">(2) 672 567 609 777 546 567 441 441 630 </linea>
+		</mundo>
+	</mundos>
+	<programas>
+		<programa nombre="p1" resultadoEjecucion="FIN PROGRAMA"/>
+	</programas>
+</resultados>
+

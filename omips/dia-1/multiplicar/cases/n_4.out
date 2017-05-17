@@ -1,0 +1,15 @@
+<resultados>
+	<mundos>
+		<mundo nombre="mundo_0">
+			<linea fila="6" compresionDeCeros="true">(2) 172 430 688 946 1204 1462 1720 1978 2236 2494 2752 3010 3268 3526 3784 4042 4300 4558 4816 5074 5332 5590 5848 6106 </linea>
+			<linea fila="5" compresionDeCeros="true">(2) 166 415 664 913 1162 1411 1660 1909 2158 2407 2656 2905 3154 3403 3652 3901 4150 4399 4648 4897 5146 5395 5644 5893 </linea>
+			<linea fila="4" compresionDeCeros="true">(2) 160 400 640 880 1120 1360 1600 1840 2080 2320 2560 2800 3040 3280 3520 3760 4000 4240 4480 4720 4960 5200 5440 5680 </linea>
+			<linea fila="3" compresionDeCeros="true">(2) 154 385 616 847 1078 1309 1540 1771 2002 2233 2464 2695 2926 3157 3388 3619 3850 4081 4312 4543 4774 5005 5236 5467 </linea>
+			<linea fila="2" compresionDeCeros="true">(2) 148 370 592 814 1036 1258 1480 1702 1924 2146 2368 2590 2812 3034 3256 3478 3700 3922 4144 4366 4588 4810 5032 5254 </linea>
+		</mundo>
+	</mundos>
+	<programas>
+		<programa nombre="p1" resultadoEjecucion="FIN PROGRAMA"/>
+	</programas>
+</resultados>
+

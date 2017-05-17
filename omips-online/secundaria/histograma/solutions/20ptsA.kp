@@ -1,0 +1,143 @@
+iniciar-programa
+    
+    define-nueva-instruccion norte como inicio
+        mientras no orientado-al-norte hacer gira-izquierda;
+    fin;
+    
+    define-nueva-instruccion este como inicio
+        mientras no orientado-al-este hacer gira-izquierda;
+    fin;
+    
+    define-nueva-instruccion sur como inicio
+        mientras no orientado-al-sur hacer gira-izquierda;
+    fin;
+    
+    define-nueva-instruccion oeste como inicio
+        mientras no orientado-al-oeste hacer gira-izquierda;
+    fin;
+    
+    define-nueva-instruccion llega-pared como inicio
+        mientras frente-libre hacer avanza;
+    fin;
+    
+    define-nueva-instruccion busca-fin-pila como inicio
+        mientras junto-a-zumbador y frente-libre hacer avanza;
+    fin;
+    
+    define-nueva-instruccion toma-todo como inicio
+        mientras junto-a-zumbador hacer inicio
+            coge-zumbador;
+        fin;
+    fin;
+    
+    define-nueva-instruccion busca-zumbador como inicio
+        mientras frente-libre y no junto-a-zumbador hacer inicio
+            avanza;
+        fin;
+    fin;
+    
+    define-nueva-instruccion recoge-restos como inicio
+        mientras frente-libre hacer inicio
+            avanza;
+            coge-zumbador;
+        fin;
+    fin;
+    
+    define-nueva-instruccion vacia-mochila como inicio
+        deja-zumbador;
+        mientras algun-zumbador-en-la-mochila hacer inicio
+            si frente-libre entonces inicio
+                avanza;
+                deja-zumbador;
+            fin;
+        fin;
+    fin;
+    
+    define-nueva-instruccion marca como inicio
+        si no junto-a-zumbador entonces inicio
+            apagate;
+        fin;
+        toma-todo;
+        norte;
+        avanza;
+        oeste;
+        llega-pared;
+        este;
+        vacia-mochila;
+        oeste;
+        recoge-restos;
+        sur;
+        avanza;
+        este;
+    fin;
+    
+    define-nueva-instruccion apila como inicio
+        si junto-a-zumbador entonces inicio
+            toma-todo;
+            norte;
+            avanza;
+            oeste;
+            busca-zumbador;
+            si no junto-a-zumbador entonces inicio
+                este;
+                busca-zumbador;
+            fin;
+            norte;
+            busca-fin-pila;
+            si junto-a-zumbador entonces inicio
+                sur;
+                llega-pared;
+                norte;
+                avanza;
+            fin;
+            deja-zumbador;
+            oeste;
+            llega-pared;
+            sur;
+            llega-pared;
+            este;
+        fin;
+    fin;
+    
+    define-nueva-instruccion acomoda como inicio
+        apila;
+        mientras frente-libre hacer inicio
+            busca-zumbador;
+            apila;
+        fin;
+    fin;
+    
+    define-nueva-instruccion baja-pila como inicio
+        norte;
+        avanza;
+        oeste;
+        busca-zumbador;
+        coge-zumbador;
+        si junto-a-zumbador entonces inicio
+            sur;
+            avanza;
+            deja-zumbador;
+        fin sino inicio
+            deja-zumbador;
+            norte;
+            busca-fin-pila;
+            si no junto-a-zumbador entonces inicio
+                sur;
+                avanza;
+            fin;
+            coge-zumbador;
+            sur;
+            llega-pared;
+            deja-zumbador;
+        fin;
+    fin;
+    
+    inicia-ejecucion
+        este;
+        busca-zumbador;
+        marca;
+        acomoda;
+        baja-pila;
+        apagate;
+    termina-ejecucion
+finalizar-programa

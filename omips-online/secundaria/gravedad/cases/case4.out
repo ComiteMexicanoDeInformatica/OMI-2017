@@ -1,0 +1,16 @@
+<resultados>
+	<mundos>
+		<mundo nombre="mundo_0">
+			<linea fila="4" compresionDeCeros="true">(6) 1 </linea>
+			<linea fila="3" compresionDeCeros="true">(2) 2 (4) 2 3 1 1 1 (10) 4 </linea>
+			<linea fila="2" compresionDeCeros="true">(1) 2 2 2 3 3 2 1 1 (10) 2 </linea>
+			<linea fila="1" compresionDeCeros="true">(1) 2 1 2 2 1 1 1 4 (10) 1 </linea>
+		</mundo>
+	</mundos>
+	<programas>
+		<programa nombre="p1" resultadoEjecucion="FIN PROGRAMA">
+			<karel mochila="0"/>
+		</programa>
+	</programas>
+</resultados>
+

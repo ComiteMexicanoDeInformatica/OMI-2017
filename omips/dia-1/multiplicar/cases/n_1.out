@@ -1,0 +1,14 @@
+<resultados>
+	<mundos>
+		<mundo nombre="mundo_0">
+			<linea fila="5" compresionDeCeros="true">(2) 30 6 42 12 </linea>
+			<linea fila="4" compresionDeCeros="true">(2) 20 4 28 8 </linea>
+			<linea fila="3" compresionDeCeros="true">(2) 40 8 56 16 </linea>
+			<linea fila="2" compresionDeCeros="true">(2) 15 3 21 6 </linea>
+		</mundo>
+	</mundos>
+	<programas>
+		<programa nombre="p1" resultadoEjecucion="FIN PROGRAMA"/>
+	</programas>
+</resultados>
+
