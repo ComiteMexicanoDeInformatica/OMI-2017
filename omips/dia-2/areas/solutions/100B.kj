@@ -1,0 +1,181 @@
+class program {
+define norte(){
+    while(!facingNorth) turnleft();
+}
+define sur(){
+    while(!facingSouth) turnleft();
+}
+define este(){
+    while(!facingEast) turnleft();
+}
+define oeste(){
+    while(!facingWest) turnleft();
+}
+define fondo(){
+    while(frontIsClear) move();
+}
+define vuelta(){
+    iterate(2) turnleft();
+}
+define turnright(){
+    iterate(3) turnleft();
+}
+
+define paso(){
+
+    if(frontIsClear){
+        move();
+        while(leftIsClear){
+            turnleft();
+            move();
+        }
+    }
+    else turnright();
+
+}
+
+define check(){
+
+   if(!nextToABeeper && (facingEast || facingWest)){
+         turnright();
+         llena();
+         vuelta();
+         fondo();
+         turnright();
+         paso();
+   }
+   else {
+      paso();
+   }
+
+}
+
+define beepers(){
+
+    if(nextToABeeper){
+        pickbeeper();
+        beepers();
+        putbeeper();
+    }
+    else {
+        paso();
+    }
+
+}
+
+define llena(){
+    if(frontIsClear){
+        move();
+        llena();
+        putbeeper();
+    }
+    else {
+        putbeeper();
+    }
+}
+
+define cuenta(x){
+
+    if(!nextToABeeper || !facingWest){
+
+        if(facingEast || facingWest){
+           if(nextToABeeper){
+               pickbeeper();
+               if(nextToABeeper){
+                 putbeeper();
+               }
+               paso();
+               while(facingNorth || facingSouth)
+                paso();
+               cuenta(x);
+           }
+           else {
+                turnright();
+                cuenta(x);
+                putbeeper();
+
+           }
+        }
+
+        else {
+           if(frontIsBlocked){
+               vuelta();
+               if(!nextToABeeper)
+               putbeeper();
+               fondo();
+               turnright();
+               paso();
+               while(facingNorth || facingSouth)
+                 paso();
+               cuenta(x);
+           }
+           else {
+             move();
+             cuenta(x);
+             putbeeper();
+           }
+        }
+
+    }
+
+    else {
+
+        pickbeeper();
+        if(nextToABeeper){
+            pickbeeper();
+            turnright();
+            iterate(x)
+              move();
+        }
+        else {
+          paso();
+          while(facingNorth || facingSouth)
+                paso();
+          cuenta(x);
+        }
+    }
+
+}
+
+define mover(){
+    if(nextToABeeper){
+        pickbeeper();
+        mover();
+        putbeeper();
+    }
+    else {
+        move();
+    }
+}
+
+define pos(x){
+
+    if(frontIsClear){
+        move();
+        pos(succ(x));
+    }
+
+    else {
+
+        turnright();
+
+        putbeeper();
+        putbeeper();
+        paso();
+        while(facingNorth || facingSouth)
+          paso();
+        cuenta(x);
+
+    }
+}
+
+program() {
+
+    sur();
+    pos(0);
+    este();
+    if(leftIsBlocked && rightIsBlocked)
+      putbeeper();
+}
+
+}

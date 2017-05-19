@@ -1,0 +1,114 @@
+iniciar-programa
+    define-prototipo-instruccion resuelve(n);
+
+    define-nueva-instruccion gira(n) como inicio
+        repetir n veces gira-izquierda;
+    fin;
+
+    define-nueva-instruccion coge-todo como inicio
+        mientras junto-a-zumbador hacer coge-zumbador;
+    fin;
+
+    define-nueva-instruccion intercambia(n) como inicio
+        si algun-zumbador-en-la-mochila entonces inicio
+            deja-zumbador;
+            intercambia(sucede(n));
+        fin sino inicio
+            coge-todo;
+            repetir n veces deja-zumbador;
+        fin;
+    fin;
+
+    define-nueva-instruccion avanza-circular como inicio
+        si frente-bloqueado entonces inicio
+            gira(2);
+            mientras frente-libre hacer avanza;
+            gira(2);
+        fin sino inicio
+            avanza;
+        fin;
+    fin;
+
+    define-nueva-instruccion resta(n) como  inicio
+        si si-es-cero(n) entonces inicio
+            si junto-a-zumbador entonces inicio
+                gira(2);
+            fin;
+            sal-de-instruccion;
+        fin;
+        si junto-a-zumbador entonces inicio
+            coge-zumbador;
+            si junto-a-zumbador entonces inicio
+                resta(precede(n));
+            fin sino inicio
+                avanza-circular;
+                resta(precede(n));
+                si orientado-al-este o orientado-al-norte entonces inicio
+                    gira(2);
+                    avanza-circular;
+                    gira(2);
+                fin sino inicio
+                    avanza-circular;
+                fin;
+            fin;
+            deja-zumbador;
+        fin sino inicio
+            gira(2);
+        fin;
+    fin;
+
+    define-nueva-instruccion valida-suma(n) como inicio
+        resta(65);
+        si orientado-al-este entonces inicio
+            gira(1);
+            resta(65);
+            si orientado-al-norte entonces inicio
+                si si-es-cero(precede(precede(n))) entonces apagate;
+                avanza;
+                gira(3);
+                avanza;
+                resuelve(2);
+            fin sino inicio
+                    gira-izquierda;
+             fin;
+        fin sino inicio
+            gira(2);
+        fin;
+    fin;
+
+    define-nueva-instruccion valida(n) como inicio
+        gira(2);
+        valida-suma(n);
+    fin;
+
+    define-nueva-instruccion shift(n) como inicio
+        gira(2);
+        valida(n);
+        gira(1);
+
+        avanza;
+        coge-todo;
+        gira(2);
+        avanza;
+        gira-izquierda;
+        repetir 4 veces inicio
+            repetir n veces inicio
+                intercambia(0);
+                avanza;
+            fin;
+            gira-izquierda;
+        fin;
+    fin;
+
+    define-nueva-instruccion resuelve(n) como inicio
+        repetir 9 veces inicio
+            shift(n);
+        fin;
+    fin;
+
+    inicia-ejecucion
+       gira(3);
+       resuelve(4);
+
+        termina-ejecucion
+finalizar-programa

@@ -1,0 +1,142 @@
+iniciar-programa
+    
+    define-nueva-instruccion norte como inicio
+    	mientras no-orientado-al-norte hacer inicio
+        	gira-izquierda;
+        fin;
+    fin;
+    
+    define-nueva-instruccion oeste como inicio
+    	mientras no-orientado-al-oeste hacer inicio
+        	gira-izquierda;
+        fin;
+    fin; 
+    
+    define-nueva-instruccion este como inicio
+    	mientras no-orientado-al-este hacer inicio
+        	gira-izquierda;
+        fin;
+    fin;
+    
+    define-nueva-instruccion sur como inicio
+    	mientras no-orientado-al-sur hacer inicio
+        	gira-izquierda;
+        fin;
+    fin;
+    
+    define-nueva-instruccion avanzaPared como inicio
+    	mientras frente-libre hacer inicio 
+        	avanza;
+        fin;
+    fin;
+    
+    define-nueva-instruccion veA11 como inicio 
+    	sur;
+        avanzaPared;
+        oeste;
+        avanzaPared;
+    fin;
+    
+    define-nueva-instruccion veA12 como inicio
+    	veA11;
+        norte;
+        avanza;
+    fin;
+    
+    define-nueva-instruccion move(n) como inicio
+    	repetir n veces inicio
+        	avanza;
+        fin;
+    fin;
+    
+    define-nueva-instruccion actualizaDiferencia como inicio
+    	si junto-a-zumbador entonces inicio
+        	coge-zumbador;
+        fin sino inicio
+            avanza;
+            deja-zumbador;
+        fin;
+    fin;
+    
+    define-nueva-instruccion compara(n) como inicio
+    	si junto-a-zumbador y no si-es-cero(n) entonces inicio
+        	coge-zumbador;
+            compara(precede(n));
+            deja-zumbador;
+        fin sino inicio
+        	si junto-a-zumbador entonces inicio
+            	sur;
+            fin;
+      	fin;
+    fin;
+    
+    define-nueva-instruccion checaDiferencia(n) como inicio
+    	si junto-a-zumbador entonces inicio
+        	coge-zumbador;
+            checaDiferencia(sucede(n));
+        fin sino inicio
+        	repetir n veces inicio
+            	deja-zumbador;
+            fin;
+            
+        	norte;
+            avanza;
+            si no-junto-a-zumbador entonces inicio
+            	este;
+                avanza;
+            fin;
+            compara(n);
+        fin;
+    fin;
+    
+    define-nueva-instruccion penal(n) como inicio 
+    	si no-junto-a-zumbador entonces inicio
+        	move(n);
+            este;
+            move(2);
+        fin sino inicio;
+        	coge-zumbador;
+        	move(sucede(n));
+        
+        	este;
+        	si junto-a-zumbador entonces inicio
+        		avanza;
+            	si junto-a-zumbador entonces inicio
+            		veA11;
+            	fin sino inicio
+            		veA12;
+                    este;
+                    avanza;
+                    oeste;
+                	actualizaDiferencia;
+                	veA11;
+            	fin;
+        	fin sino inicio
+        		avanza;
+            	si no-junto-a-zumbador entonces inicio
+            		veA11;
+            	fin sino inicio
+            		veA12;
+                	este;
+                    actualizaDiferencia;
+                	veA11;
+            	fin;
+        	fin;
+        
+        	checaDiferencia(0);
+        	si orientado-al-sur entonces inicio
+        		norte;
+            	move(n);
+        	fin sino inicio
+        		veA11;
+                norte;
+            	penal(sucede(n));
+        	fin;
+        fin;
+    fin;
+    
+    inicia-ejecucion
+        penal(1);
+        apagate;
+    termina-ejecucion
+finalizar-programa

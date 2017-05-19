@@ -1,0 +1,214 @@
+class program {
+    
+    void norte() {
+    	while(!facingNorth) turnleft();
+    }
+    void sur() {
+    	while(!facingSouth) turnleft();
+    }
+    void este() {
+    	while(!facingEast) turnleft();
+    }
+    void oeste() {
+    	while(!facingWest) turnleft();
+    }
+    void turn(a) {
+    	iterate(a) turnleft();
+    }
+    void corner() {
+    	sur();
+        while(frontIsClear) move();
+        oeste();
+        while(frontIsClear) move();
+        norte();
+    }
+    
+    void place(x) {
+    	corner();
+        iterate(x) {
+        	move();
+            turn(3);
+            move();
+            turn(1);
+        }
+    }
+    
+    void avanza() {
+    	if(frontIsClear) {
+        	move();
+            if(frontIsBlocked && leftIsClear) {
+            	turn(3);
+                move();
+                turn(3);
+                move();
+                turn(1);
+            }
+        } else {
+        	turn(3);
+            move();
+        }
+    }
+    
+    void regresa() {
+    	if(frontIsClear) {
+        	move();
+            if(frontIsBlocked && rightIsClear) {
+            	turn(1);
+                move();
+                turn(1);
+                move();
+                turn(3);
+            }
+        } else {
+        	turn(1);
+            move();
+        }
+    }
+    
+    void shift() {
+    	if(nextToABeeper) {
+        	pickbeeper();
+            shift();
+            putbeeper();
+        } else {
+        	avanza();
+            if(nextToABeeper) {
+            	shift();
+                regresa();
+            } else {
+            	este();
+            }
+        }
+    }
+    
+    void junta() {
+    	if(nextToABeeper) {
+        	pickbeeper();
+            junta();
+            putbeeper();
+        } else {
+        	if(frontIsClear) {
+            	move();
+                junta();
+            }
+        }
+    }
+    
+    void count(x) {
+    	if(nextToABeeper) {
+        	pickbeeper();
+            count(succ(x));
+        } else {
+        	while(frontIsClear) {
+            	move();
+                iterate(x) {
+                	if(!nextToABeeper) {
+                    	sur();
+                        return();
+                    }
+                    pickbeeper();
+                }
+                if(nextToABeeper) {
+                	sur();
+                    return();
+                }
+            }
+            norte();
+        }
+    }
+    
+    void checkSum() {
+    	while(rightIsClear) {
+        	junta();
+            turn(3);
+            move();
+            turn(3);
+            while(frontIsClear) move();
+            turn(2);
+        }
+        junta();
+        turnleft();
+        count(0);
+    }
+    
+    void recover(x) {
+    	if(nextToABeeper) {
+        	pickbeeper();
+            recover(succ(x));
+            putbeeper();
+        } else {
+        	iterate(x) putbeeper();
+            if(frontIsClear) {
+            	move();
+                recover(0);
+                move();
+                while(nextToABeeper) pickbeeper();
+            } else {
+            	if(rightIsClear) {
+                	turn(3);
+                    move();
+                    turn(3);
+                    while(frontIsClear) move();
+                    turn(2);
+                    recover(0);
+                    turn(3);
+                    move();
+                    turn(3);
+                    while(frontIsClear) move();
+                    turn(2);
+                } else {
+                	turn(2);
+                    checkSum();
+                    if(facingSouth) {
+                    	sur();
+                        while(frontIsClear) move();
+                        este();
+                        while(frontIsClear) move();
+                    } else {
+                    	este();
+                        while(frontIsClear) move();
+                        norte();
+                        while(frontIsClear) move();
+                    }
+                    turn(2);
+                }
+                while(nextToABeeper) pickbeeper();
+            }
+        }
+    }
+    
+    void check() {
+    	corner();
+        recover(0);
+        if(!facingSouth) return();
+        corner();
+        while(frontIsClear) move();
+        este();
+        recover(0);
+        if(!facingSouth) return();
+        norte();
+        turnoff();
+    }
+    
+    void solve(x) {
+    	if(!iszero(x)) {
+        	iterate(8) {
+                check();
+                place(x);
+                shift();
+            }
+        } else {
+        	iterate(4) {
+            	place(succ(x));
+                solve(succ(x));
+                place(x);
+                shift();
+            }
+        }
+    }
+    
+    program () {
+    	solve(0);
+        turnoff();
+    }
+}

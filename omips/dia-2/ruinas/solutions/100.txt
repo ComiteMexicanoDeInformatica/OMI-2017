@@ -1,0 +1,112 @@
+iniciar-programa
+	define-nueva-instruccion deja (n) como
+    inicio
+    	repetir n veces
+        	deja-zumbador;
+    fin;
+
+	define-nueva-instruccion gira (n) como
+    inicio
+    	repetir n veces
+        	gira-izquierda;
+    fin;
+    
+    define-nueva-instruccion termina como
+    inicio
+    	avanza;
+        si no-junto-a-zumbador entonces
+        	deja(2);
+        apagate;
+    fin;
+    
+    define-nueva-instruccion revisa como
+    inicio
+    	coge-zumbador;
+        si junto-a-zumbador entonces
+        inicio
+        	deja-zumbador;
+        	termina;
+        fin;
+        deja-zumbador;  
+    fin;
+    
+    define-nueva-instruccion sube como
+    inicio
+    	si orientado-al-este entonces
+        inicio
+        	gira-izquierda;
+            revisa;
+            avanza;
+            gira(3);
+        fin
+        sino si orientado-al-oeste entonces
+        inicio
+        	gira(3);
+            revisa;
+            avanza;
+            gira-izquierda;
+        fin;
+    fin;
+    
+	define-nueva-instruccion piramide (n) como
+    inicio
+    	repetir n veces
+        inicio
+        	si no-junto-a-zumbador entonces
+            	deja-zumbador;
+            si frente-libre entonces
+            	avanza;
+        fin;
+        si no-junto-a-zumbador entonces
+        	deja(2);
+        avanza;
+        repetir n veces
+        inicio
+        	si no-junto-a-zumbador entonces
+            	deja-zumbador;
+            si frente-libre entonces
+            	avanza
+        fin;
+        gira(2);
+        si no-junto-a-zumbador entonces
+        	avanza;
+        avanza;
+        sube;
+        piramide(precede(n));
+    fin;
+    
+    define-nueva-instruccion regresa como
+    inicio
+    	gira(2);
+        mientras frente-libre hacer
+        	avanza;
+        gira(2);
+    fin;
+    
+    define-nueva-instruccion cuenta (n) como
+    inicio
+    	si junto-a-zumbador entonces
+        inicio
+        	coge-zumbador;
+            si junto-a-zumbador entonces
+            inicio
+            	deja-zumbador;
+            	regresa;
+            	piramide(n);
+            fin
+            sino
+            inicio
+            	deja-zumbador;
+                avanza;
+                cuenta(sucede(n));
+            fin;
+        fin;
+    fin;
+    
+    inicia-ejecucion
+        mientras no-orientado-al-este hacer
+        	gira-izquierda;
+        cuenta(0);
+        apagate;
+    termina-ejecucion
+finalizar-programa

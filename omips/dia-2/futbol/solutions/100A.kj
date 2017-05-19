@@ -1,0 +1,172 @@
+class program {
+define norte(){
+    while(!facingNorth) turnleft();
+}
+define sur(){
+    while(!facingSouth) turnleft();
+}
+define este(){
+    while(!facingEast) turnleft();
+}
+define oeste(){
+    while(!facingWest) turnleft();
+}
+define fondo(){
+    while(frontIsClear) move();
+}
+
+define mueve_beepers(){
+     if(nextToABeeper){
+         pickbeeper();
+         mueve_beepers();
+         putbeeper();
+     }
+     else move();
+}
+
+define cuenta_penales(x){
+
+    if(nextToABeeper){
+        pickbeeper();
+        cuenta_penales(succ(x));
+    }
+    else {
+        iterate(2) move();
+        checa(x);
+    }
+}
+
+define suma(){
+    if(nextToABeeper){
+        pickbeeper();
+        este();
+        iterate(2) move();
+        putbeeper();
+        oeste();
+        iterate(2) move();
+    }
+    este();
+    move();
+    if(nextToABeeper){
+        pickbeeper();
+        este();
+        iterate(2) move();
+        putbeeper();
+        oeste();
+        iterate(2) move();
+    }
+    este();
+    move();
+}
+
+define resta(){
+
+    while(nextToABeeper){
+        este();
+        move();
+        if(nextToABeeper){
+            pickbeeper();
+            oeste();
+            move();
+            pickbeeper();
+            este();
+        }
+        else {
+            oeste();
+            move();
+            este();
+            return();
+        }
+    }
+
+}
+
+
+define checa(x){
+
+   if(!iszero(x)){
+       suma();
+       resta();
+
+       if(nextToABeeper){ prueba_A(pred(x)); }
+
+       else {
+           move();
+           if(nextToABeeper){
+               prueba_B(pred(x));
+           }
+           else {
+               if(iszero(pred(x))){
+                   oeste();
+                   move();
+                   turnoff();
+               }
+           }
+       }
+
+       oeste();
+       fondo();
+       este();
+       iterate(2) move();
+       norte();
+       mueve_beepers();
+       sur();
+       move();
+       este();
+       move();
+       norte();
+       mueve_beepers();
+       oeste();
+       fondo();
+       norte();
+
+       checa(pred(x));
+
+   }
+
+}
+
+define prueba_A(x){
+
+    if(nextToABeeper && !iszero(x)){
+        pickbeeper();
+        prueba_A(pred(x));
+        putbeeper();
+    }
+    else {
+        if(nextToABeeper  ){
+            oeste();
+            fondo();
+            turnoff();
+        }
+
+    }
+}
+
+define prueba_B(x){
+
+    if(nextToABeeper && !iszero(x)){
+        pickbeeper();
+        prueba_B(pred(x));
+        putbeeper();
+    }
+    else {
+        if(nextToABeeper ){
+            oeste();
+            fondo();
+            este();
+            move();
+            turnoff();
+        }
+
+    }
+}
+
+program() {
+
+
+    cuenta_penales(0);
+
+}
+
+}

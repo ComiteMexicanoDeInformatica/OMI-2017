@@ -1,0 +1,72 @@
+class program {
+
+    void gira(a) {
+    	iterate(a) turnleft();
+    }    
+
+	void back() {
+    	gira(2);
+        move();
+        gira(2);
+    }
+
+    void pick() {
+    	if(nextToABeeper) {
+        	pickbeeper();
+            pick();
+            putbeeper();
+        } else {
+        	putbeeper();
+            back();
+        }
+    }
+
+    void area() {
+    	putbeeper();
+        putbeeper();
+        iterate(4) {
+        	if(frontIsClear) {
+            	move();
+                if(!nextToABeeper) {
+                	area();
+                    pick();
+                } else {
+                	back();
+                }
+            }
+            turnleft();
+        }
+        pickbeeper();
+    }
+
+    void clean() {
+    	iterate(4) {
+        	if(frontIsClear) {
+            	move();
+                if(nextToABeeper) {
+                	pickbeeper();
+                    if(nextToABeeper) putbeeper();
+                    else clean();
+                }
+                back();
+            }
+            turnleft();
+        }
+    }
+
+    program () {
+    	area();
+        iterate(4) {
+            if(frontIsClear) {
+            	move();
+            	if(nextToABeeper) {
+               	    pickbeeper();
+                    clean();
+                }
+                back();
+            }
+            turnleft();
+        }
+        turnoff();
+    }
+}

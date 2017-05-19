@@ -1,0 +1,78 @@
+iniciar-programa
+	define-prototipo-instruccion binaria(n);
+    
+    
+    define-nueva-instruccion norte como inicio
+    	mientras no-orientado-al-norte hacer inicio
+        	gira-izquierda;
+        fin;
+        
+    fin;
+    
+    define-nueva-instruccion zumb(n) como inicio
+    	si junto-a-zumbador entonces inicio
+        	coge-zumbador;
+            zumb(sucede(n));
+        fin sino inicio
+        	binaria(n);
+        fin;            
+    fin;
+   
+
+	define-nueva-instruccion mitad(n) como inicio
+    	si si-es-cero(n) o si-es-cero(sucede(n)) entonces sal-de-instruccion;
+        si frente-libre entonces avanza;
+        mitad(precede(precede(n)));
+        deja-zumbador;
+        
+    fin;
+    
+    define-nueva-instruccion pared como inicio
+    	mientras frente-libre hacer avanza;
+    fin;
+    
+    define-nueva-instruccion orienta como inicio
+    	norte;
+        pared;
+        gira-izquierda;
+        gira-izquierda;
+        si junto-a-zumbador entonces inicio
+        	pared;
+            gira-izquierda;
+            gira-izquierda;
+            gira-izquierda;
+         fin sino inicio
+         	pared;
+            gira-izquierda;
+         fin;
+    fin;
+    
+	define-nueva-instruccion binaria(n) como inicio
+    	orienta;
+        si si-es-cero(n) o si-es-cero(precede(n)) entonces inicio
+        	si orientado-al-este entonces avanza;
+            norte;
+            pared;
+            apagate;
+        fin;    
+        mitad(n);
+        zumb(0);
+    fin;
+
+
+	define-nueva-instruccion cuenta(n) como inicio
+    	si frente-libre entonces inicio
+        	avanza;
+            cuenta(sucede(n));
+        fin sino inicio
+        	gira-izquierda;
+            gira-izquierda;
+            binaria(n);
+        fin;
+    fin;
+
+    inicia-ejecucion
+        cuenta(1);
+        apagate;
+    termina-ejecucion
+finalizar-programa

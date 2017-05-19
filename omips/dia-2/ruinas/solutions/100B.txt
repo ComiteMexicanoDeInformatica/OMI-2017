@@ -1,0 +1,100 @@
+class program {
+
+	void norte(){
+    	while(notFacingNorth)
+        	turnleft();
+    }
+    
+    void este(){
+    	while(notFacingEast)
+        	turnleft();
+    }
+    
+    void oeste(){
+    	while(notFacingWest)
+        	turnleft();
+    }
+    
+    void sur(){
+    	while(notFacingSouth)
+        	turnleft();
+    }
+    
+    void pon1(){
+    	if(notNextToABeeper)
+        	putbeeper();
+    }
+    
+    void pon2(){
+    	if(notNextToABeeper){
+        	putbeeper();
+            putbeeper();
+        } else {
+        	pickbeeper();
+            if(notNextToABeeper){
+            	putbeeper();
+                putbeeper();
+            } else {
+            	putbeeper();
+            }
+        }
+    }
+    
+    void reconstruyeRenglon(n){
+    	oeste();
+        iterate(n){
+        	move();
+            pon1();
+        } 
+        
+        este();
+        iterate(n)
+        	move();
+        
+        iterate(n){
+        	move();
+            pon1();
+        }
+        
+        oeste();
+        iterate(n)
+        	move();
+            
+       	sur();
+        if(frontIsClear){
+        	move();
+            reconstruyeRenglon(succ(n));
+        }
+    }
+    
+    void reconstruye(n){
+    	iterate(n){
+        	pon2();
+            move();
+        }
+        
+        pon2();
+        sur();
+        move();
+        reconstruyeRenglon(1);
+    }
+    
+    void piramide(n){
+    	pickbeeper();
+        if(notNextToABeeper){
+        	putbeeper();
+            move();
+            piramide(succ(n));
+        } else {
+        	putbeeper();
+            norte();
+            reconstruye(n);
+        }
+    }
+    
+    program () {
+    	este();
+        piramide(0);
+        turnoff();
+    }
+}

@@ -1,0 +1,85 @@
+iniciar-programa
+
+	define-nueva-instruccion gira(n) como inicio
+    	repetir n veces inicio
+        	gira-izquierda;
+        fin;
+    fin;
+    
+    define-nueva-instruccion quita(n) como inicio
+    	repetir n veces inicio
+        	si no-orientado-al-sur entonces inicio
+            	coge-zumbador;
+                si no-junto-a-zumbador entonces inicio
+                	gira(2);
+                fin;
+            fin sino inicio
+            	deja-zumbador;
+            fin;
+        fin;
+    fin;
+    
+    define-nueva-instruccion deja(n) como inicio
+    	repetir n veces inicio
+        	deja-zumbador;
+        fin;
+    fin;
+    
+    define-nueva-instruccion resta(n) como inicio
+    	si junto-a-zumbador entonces inicio
+        	coge-zumbador;
+            resta(n);
+            deja(n);
+        fin sino inicio
+        	si frente-libre entonces inicio
+            	avanza;
+                resta(sucede(sucede(n)));
+            fin sino inicio
+            	gira(3);
+                avanza;
+            fin;
+        fin;
+    fin;
+    
+    define-nueva-instruccion suma(n) como inicio
+    	si junto-a-zumbador entonces inicio
+        	coge-zumbador;
+            suma(n);
+            quita(n);
+        fin sino inicio
+        	avanza;
+        	si si-es-cero(n) entonces inicio
+                resta(2);
+            fin sino inicio
+            	si si-es-cero(precede(n)) entonces inicio
+                	resta(1);
+                fin sino inicio
+                	suma(precede(precede(n)));
+                fin;
+            fin;
+        fin;
+    fin;
+    
+    define-nueva-instruccion diferencias(n) como inicio
+    	si junto-a-zumbador y frente-libre entonces inicio 
+        	avanza;
+            diferencias(sucede(n));
+        fin sino inicio
+        	si frente-libre entonces inicio
+            	gira(2);
+                avanza;
+                suma(precede(n));
+            fin sino inicio
+            	gira(2);
+                suma(n);
+            fin;
+        fin;
+    fin;
+
+    inicia-ejecucion
+    	si junto-a-zumbador entonces inicio
+        	diferencias(0);
+        fin;
+        apagate;
+    termina-ejecucion
+finalizar-programa

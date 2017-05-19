@@ -1,0 +1,56 @@
+class program {
+
+    void turn(a) {
+    	iterate(a) turnleft();
+    }
+
+	void fill() {
+    	if(!nextToABeeper) {
+        	putbeeper();
+            iterate(4) {
+            	if(frontIsClear) {
+                	move();
+                    fill();
+                    turn(2);
+                    move();
+                    turn(2);
+                }
+                turnleft();
+            }
+        }
+    }
+
+	void clean() {
+    	if(nextToABeeper) {
+        	pickbeeper();
+            iterate(4) {
+            	if(frontIsClear) {
+                	move();
+                    clean();
+                    turn(2);
+                    move();
+                    turn(2);
+                }
+                turnleft();
+            }
+        }
+    }
+
+	void count(x) {
+    	if(anyBeepersInBeeperBag) {
+        	putbeeper();
+            count(succ(x));
+        } else {
+        	iterate(x) pickbeeper();
+            clean();
+            while(anyBeepersInBeeperBag) putbeeper();
+            iterate(x) pickbeeper();
+        }
+    }
+
+    program () {
+    	fill();
+        count(0);
+        turnoff();
+    }
+}

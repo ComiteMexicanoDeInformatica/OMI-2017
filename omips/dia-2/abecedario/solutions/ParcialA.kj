@@ -1,0 +1,310 @@
+class program {
+
+define half()
+{
+    turnleft();
+    turnleft();
+}
+
+define right()
+{
+    turnleft();
+    turnleft();
+    turnleft();
+}
+
+define wall()
+{
+    while(frontIsClear)
+        move();
+}
+
+define south()
+{
+    while(notFacingSouth)
+        turnleft();
+}
+
+define divide_dos(x)
+{
+    if(nextToABeeper)
+    {
+        iterate(x)
+        {
+           if(nextToABeeper)
+               pickbeeper();
+           else
+           {
+               move();
+               move();
+               return();
+           }
+        }
+        move();
+        move();
+        putbeeper();
+        half();
+        move();
+        move();
+        half();
+        divide_dos(x);
+    }
+    else
+    {
+        move();
+        move();
+    }
+}
+
+define divide(x)
+{
+    if(nextToABeeper)
+    {
+        pickbeeper();
+        divide(succ(x));
+    }
+    else
+    {
+        half();
+        move();
+        half();
+        divide_dos(x);
+    }
+}
+
+define solve(x)
+{
+    if(iszero(x))
+    {
+        if(notNextToABeeper)
+            turnleft();
+         return();
+    }
+    if(nextToABeeper)
+    {
+        pickbeeper();
+        solve(pred(x));
+        if(nextToABeeper)
+            putbeeper();
+    }
+    else
+    {
+        putbeeper();
+        right();
+    }
+}
+
+define mueve(x)
+{
+    iterate(x)
+        move();
+}
+
+define pickAll()
+{
+    while(nextToABeeper)
+        pickbeeper();
+}
+
+define nombre(x)
+{
+    if(iszero(x))
+    {
+        return();
+    }
+    while(frontIsClear)
+    {
+        solve(x);
+        if(facingNorth)
+        {
+            turnleft();
+            wall();
+            right();
+            move();
+            move();
+            right();
+            mueve(x);
+            half();
+            move();
+            putbeeper();
+            wall();
+            turnleft();
+            move();
+            move();
+            turnleft();
+        }
+        else
+        {
+            if(facingSouth)
+            {
+                turnleft();
+                pickbeeper();
+                move();
+            }
+            else
+                move();
+        }
+    }
+    solve(x);
+    if(facingNorth)
+    {
+        turnleft();
+        wall();
+        right();
+        move();
+        move();
+        right();
+        mueve(x);
+        half();
+        move();
+        putbeeper();
+        wall();
+        turnleft();
+        move();
+        move();
+        turnleft();
+    }
+    else
+    {
+        if(facingSouth)
+        {
+            turnleft();
+            pickbeeper();
+        }
+    }
+    half();
+    wall();
+    half();
+    nombre(pred(x));
+}
+
+define copy(x)
+{
+    if(nextToABeeper)
+    {
+        pickbeeper();
+        copy(x);
+        putbeeper();
+    }
+    else
+    {
+        pickAll();
+        iterate(x)
+            move();
+    }
+}
+
+define minimo()
+{
+    while(nextToABeeper)
+    {
+        pickbeeper();
+        move();
+        if(nextToABeeper)
+        {
+            pickbeeper();
+            half();
+            move();
+            move();
+            half();
+            putbeeper();
+            move();
+        }
+        else
+        {
+            half();
+            move();
+            pickAll();
+            move();
+            half();
+            copy(2);
+        }
+    }
+    move();
+    pickAll();
+    half();
+    move();
+    move();
+    half();
+    copy(2);
+}
+
+
+program() {
+    south();
+    wall();
+    right();
+    wall();
+    half();
+    nombre(26);
+    turnleft();
+    move();
+    right();
+    nombre(26);
+    turnleft();
+    move();
+    move();
+    iterate(26)
+    {
+        if(nextToABeeper)
+        {
+            divide(0);
+            if(nextToABeeper)
+            {
+                half();
+                move();
+                turnleft();
+                move();
+                turnleft();
+            }
+            else
+            {
+                turnleft();
+                wall();
+                turnleft();
+                move();
+                move();
+                pickAll();
+                turnoff();
+            }
+        }
+        else
+        {
+            right();
+            move();
+            turnleft();
+        }
+    }
+    move();
+    turnleft();
+    while(frontIsClear)
+    {
+        if(nextToABeeper)
+        {
+            move();
+            if(nextToABeeper)
+            {
+                half();
+                move();
+                half();
+                minimo();
+            }
+            else
+            {
+                half();
+                move();
+                half();
+                copy(1);
+            }
+        }
+        else
+        {
+            move();
+        }
+    }
+    turnleft();
+    copy(2);
+    turnoff();
+}
+
+}

@@ -1,0 +1,93 @@
+class program {
+
+void norte() {
+ while(!facingNorth) turnleft();
+}
+void sur() {
+ while(!facingSouth) turnleft();
+}
+void este() {
+ while(!facingEast) turnleft();
+}
+void oeste() {
+ while(!facingWest) turnleft();
+}
+
+void negativos(n) {
+ if(nextToABeeper) {
+   pickbeeper();
+   negativos(n);
+   iterate(n) putbeeper();
+ } else {
+   if(frontIsClear) {
+     move();
+     negativos(succ(succ(n)));
+   } else {
+     norte();
+     move();
+   }
+ }
+}
+
+void pick() {
+ if(!nextToABeeper) {
+   sur();
+ }
+ if(facingSouth) {
+   putbeeper();
+ } else {
+   pickbeeper();
+ }
+}
+
+void positivos(n) {
+ if(nextToABeeper) {
+   pickbeeper();
+   positivos(n);
+   iterate(n) pick();
+ } else {
+   move();
+   if(iszero(n) || iszero(pred(n))) {
+     if(iszero(n)) {
+       negativos(2);
+     } else {
+       negativos(1);
+     }
+   } else {
+     positivos(pred(pred(n)));
+   }
+ }
+}
+
+void go(n) {
+ if(frontIsClear) {
+   move();
+   if(nextToABeeper) {
+     go(succ(n));
+   } else {
+     if(iszero(pred(n))) {
+       turnoff();
+     }
+     oeste();
+     move();
+     positivos(pred(n));
+    }
+ } else {
+     if(iszero(pred(n))) {
+       turnoff();
+     }
+     oeste();
+     positivos(pred(n));
+ }
+}
+
+   program () {
+       if(!nextToABeeper) {
+         turnoff();
+       }
+       este();
+       go(1);
+       norte();
+       turnoff();
+   }
+}

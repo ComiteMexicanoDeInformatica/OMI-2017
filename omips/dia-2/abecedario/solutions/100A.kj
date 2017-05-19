@@ -1,0 +1,165 @@
+class program {
+define sur(){
+    while(!facingSouth) turnleft();
+}
+define norte(){
+    while(!facingNorth) turnleft();
+}
+define este(){
+    while(!facingEast) turnleft();
+}
+define oeste(){
+    while(!facingWest) turnleft();
+}
+define vuelta(){
+    turnleft(); turnleft();
+}
+define fondo(){
+    while(frontIsClear) move();
+}
+define turnright(){
+    iterate(3) turnleft();
+}
+
+define paso(){
+    if(nextToABeeper && frontIsClear)
+      move();
+    else oeste();
+}
+
+define posicion(){
+    while(facingEast){
+         paso();
+    }
+    if(!nextToABeeper && frontIsClear)
+      move();
+}
+
+define repeticiones(x){
+
+    if(nextToABeeper){
+        pickbeeper();
+        repeticiones(succ(x));
+    }
+
+    else {
+       fondo();
+       sur();
+       move();
+       este();
+       checar(x);
+    }
+}
+
+define checar(x){
+
+    if(facingEast){
+
+        compara(x);
+        if(facingNorth){
+            este();
+            paso();
+            checar(x);
+            putbeeper();
+        }
+        else {
+            paso();
+            checar(x);
+        }
+    }
+
+    else {
+       fondo();
+       norte();
+       move();
+       este();
+       posicion();
+       if(nextToABeeper){
+           vuelta();
+           move();
+       }
+       norte();
+       move();
+       putbeeper();
+    }
+
+}
+
+define compara(x){
+
+    if(!iszero(x) && nextToABeeper){
+        pickbeeper();
+        compara(pred(x));
+        putbeeper();
+    }
+    else {
+        if(iszero(x) && !nextToABeeper) norte();
+    }
+}
+
+define menor(x){
+
+   if(nextToABeeper){
+       pickbeeper();
+       menor(succ(x));
+   }
+   else {
+       move();
+       compara_menor(x);
+       if(facingSouth){
+         vacio();
+         iterate(x) putbeeper();
+       }
+   }
+}
+
+define vacio(){
+    while(nextToABeeper)
+      pickbeeper();
+}
+
+define compara_menor(x){
+
+    if(!iszero(x) && nextToABeeper){
+        pickbeeper();
+        compara_menor(pred(x));
+        if(facingNorth)
+          putbeeper();
+    }
+    else {
+        if(!iszero(x))
+            norte();
+        else sur();
+    }
+
+}
+
+program(){
+
+    norte();
+    move();
+    este();
+    posicion();
+
+    while(nextToABeeper){
+
+        repeticiones(0);
+        sur();
+        move();
+        oeste();
+        if(frontIsClear)
+          move();
+    }
+    norte();
+    move();
+    este();
+    posicion();
+
+    while(frontIsClear){
+        menor(0);
+        oeste();
+    }
+    pickbeeper();
+
+}
+}

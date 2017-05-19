@@ -1,0 +1,361 @@
+class program {
+
+	define halfturn(){
+        turnleft();
+        turnleft();
+    }
+
+	define turnright(){
+        turnleft();
+        turnleft();
+        turnleft();
+    }
+    define subeYVerificaBeeper(){
+        while(notFacingNorth){
+            turnleft();
+        }
+        while(frontIsClear){
+        	move();
+        }
+        if(nextToABeeper){
+        	halfturn();
+            while(frontIsClear){
+            	move();
+            }
+            turnright();
+        }else{
+        	halfturn();
+            while(frontIsClear){
+            	move();
+            }
+            turnleft();
+        }
+    }
+
+    define subeTerminaSiHayBeeper(){
+        while(notFacingNorth){
+            turnleft();
+        }
+        while(frontIsClear){
+        	move();
+        }
+        if(nextToABeeper){
+        	turnoff();
+        }else{
+        	halfturn();
+            while(frontIsClear){
+            	move();
+            }
+            turnleft();
+        }
+    }
+
+    define terminaIzquierdaADerecha(){
+    	while(notFacingNorth){
+            turnleft();
+        }
+        while(frontIsClear){
+            move();
+        }
+        turnoff();
+    }
+
+    define terminaDerechaAIzqueirda(){
+        move();
+    	while(notFacingNorth){
+            turnleft();
+        }
+        while(frontIsClear){
+            move();
+        }
+        turnoff();
+    }
+
+    	define uno(){
+
+        if(facingEast){
+        	subeTerminaSiHayBeeper();
+            if(notFacingEast){
+              terminaIzquierdaADerecha();
+            }
+        }else{
+        	subeYVerificaBeeper();
+            if(notFacingWest){
+              terminaDerechaAIzqueirda();
+            }
+        }
+
+
+        iterate(1){
+          if(frontIsClear){
+            move();
+          }
+        }
+
+        if(frontIsBlocked){
+          halfturn();
+          uno();
+        }else{
+           if(facingEast){
+           		subeTerminaSiHayBeeper();
+                if(facingEast){
+                   dos();
+                }else{
+                    terminaIzquierdaADerecha();
+                }
+           }else{
+           		subeYVerificaBeeper();
+                if(facingWest){
+                	dos();
+                }else{
+                    terminaDerechaAIzqueirda();
+                }
+           }
+
+        }
+
+    }
+
+	define dos(){
+
+        iterate(2){
+          if(frontIsClear){
+            move();
+          }
+        }
+
+        if(frontIsBlocked){
+          halfturn();
+          uno();
+        }else{
+           if(facingEast){
+           		subeYVerificaBeeper();
+                if(facingEast){
+                   cuatro();
+                }else{
+                	move();
+                    uno();
+                }
+           }else{
+           		subeYVerificaBeeper();
+                if(facingWest){
+                	cuatro();
+                }else{
+                	move();
+                    uno();
+                }
+           }
+
+        }
+
+    }
+
+	define cuatro(){
+
+        iterate(4){
+          if(frontIsClear){
+            move();
+          }
+        }
+
+        if(frontIsBlocked){
+          halfturn();
+          uno();
+        }else{
+           if(facingEast){
+           		subeYVerificaBeeper();
+                if(facingEast){
+                   ocho();
+                }else{
+                	move();
+                    uno();
+                }
+           }else{
+           		subeYVerificaBeeper();
+                if(facingWest){
+                	ocho();
+                }else{
+                	move();
+                    uno();
+                }
+           }
+
+        }
+
+    }
+
+	define ocho(){
+
+        iterate(8){
+          if(frontIsClear){
+            move();
+          }
+        }
+
+        if(frontIsBlocked){
+          halfturn();
+          uno();
+        }else{
+           if(facingEast){
+           		subeYVerificaBeeper();
+                if(facingEast){
+                   dieciseis();
+                }else{
+                	move();
+                    uno();
+                }
+           }else{
+           		subeYVerificaBeeper();
+                if(facingWest){
+                	dos();
+                }else{
+                	move();
+                    uno();
+                }
+           }
+
+        }
+
+    }
+
+	define dieciseis(){
+
+        iterate(16){
+          if(frontIsClear){
+            move();
+          }
+        }
+
+        if(frontIsBlocked){
+          halfturn();
+          uno();
+        }else{
+           if(facingEast){
+           		subeYVerificaBeeper();
+                if(facingEast){
+                  treintaydos();
+                }else{
+                	move();
+                    uno();
+                }
+           }else{
+           		subeYVerificaBeeper();
+                if(facingWest){
+                	treintaydos();
+                }else{
+                	move();
+                    uno();
+                }
+           }
+
+        }
+
+    }
+
+	define treintaydos(){
+
+        iterate(32){
+          if(frontIsClear){
+            move();
+          }
+        }
+
+        if(frontIsBlocked){
+          halfturn();
+          uno();
+        }else{
+           if(facingEast){
+           		subeYVerificaBeeper();
+                if(facingEast){
+                   sesentaycuatro();
+                }else{
+                	move();
+                    uno();
+                }
+           }else{
+           		subeYVerificaBeeper();
+                if(facingWest){
+                	sesentaycuatro();
+                }else{
+                	move();
+                    uno();
+                }
+           }
+
+        }
+
+    }
+
+	define sesentaycuatro(){
+
+        iterate(64){
+          if(frontIsClear){
+            move();
+          }
+        }
+
+        if(frontIsBlocked){
+          halfturn();
+          uno();
+        }else{
+           if(facingEast){
+           		subeYVerificaBeeper();
+                if(facingEast){
+                   cientroveintiocho();
+                }else{
+                	move();
+                    uno();
+                }
+           }else{
+           		subeYVerificaBeeper();
+                if(facingWest){
+                	cientroveintiocho();
+                }else{
+                	move();
+                    uno();
+                }
+           }
+
+        }
+
+    }
+
+	define cientroveintiocho(){
+
+        iterate(128){
+          if(frontIsClear){
+            move();
+          }
+        }
+
+        if(frontIsBlocked){
+          halfturn();
+          uno();
+        }else{
+           if(facingEast){
+           		subeYVerificaBeeper();
+                if(facingEast){
+                   turnoff();
+                }else{
+                	move();
+                    uno();
+                }
+           }else{
+           		subeYVerificaBeeper();
+                if(facingWest){
+                	turnoff();
+                }else{
+                	move();
+                    uno();
+                }
+           }
+
+        }
+
+    }
+
+    program () {
+        uno();
+        turnoff();
+    }
+}
